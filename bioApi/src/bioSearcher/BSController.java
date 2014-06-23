@@ -42,27 +42,16 @@ public class BSController extends HttpServlet {
 					if (pathSteps[2].equals("characters")) {
 
 						//Handle Character
-						jArray = new JSONArray();
-						jObject = new JSONObject();
 
-						BSFamily family= new BSFamily(fId);
+						BSFamily family = new BSFamily(fId);
 
-						for (BSDataStorage character: family.getCharacters()) {
-							jObject.clear();
-							jObject.put(character.getId(), character.getName());
-							jArray.add(jObject.clone());
-						}
-						System.out.print(jArray);
+						System.out.print(family.getJSONDescription());
 					}
 				} else {
 					// Handle Family
 					jObject = new JSONObject();
 					BSFamily family = new BSFamily(fId);
-
-					jObject.put("id", family.getId());
-					jObject.put("name", family.getName());
-					jArray.add(jObject);
-					System.out.print(jObject);	
+					System.out.print(family.getJSONDescription());	
 				}
 			}
 		} else {
