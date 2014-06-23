@@ -4,37 +4,29 @@ package bioSearcher;
 public class BSFamily extends BSDataStorage {
 	private BSCharacter[] characters = new BSCharacter[2];
 	
-	public BSFamily(int newId){
-		id = newId;
+	public BSFamily(int id){
+		super(id);
 		
 		switch(id){
 			case 11:
-				name = "Hunde";
-				characters[0] = new BSCharacter(21);
-				characters[1] = new BSCharacter(22);
+				this.name = "Hunde";
+				this.characters[0] = new BSCharacter(21);
+				this.characters[1] = new BSCharacter(22);
 				break;
 			case 12: 
 				name = "Fische";
-				characters[0] = new BSCharacter(23);
-				characters[1] = new BSCharacter(24);
+				this.characters[0] = new BSCharacter(23);
+				this.characters[1] = new BSCharacter(24);
 				break;
 			default:
-				name = "Class undefined";
+				this.name = "Class undefined";
 				break;
 		}
 		
 	}
 	
 	public BSCharacter[] getCharacters() {
-		return characters;
-	}
-	
-	public int getId(){
-		return id;
-	}
-	
-	public String getName(){
-		return name;
+		return this.characters;
 	}
 
 }
