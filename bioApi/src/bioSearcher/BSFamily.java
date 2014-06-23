@@ -40,9 +40,7 @@ public class BSFamily extends BSDataStorage {
 
 		jObject.put("id:", BSFamily.this.getId());
 		jObject.put("name:", BSFamily.this.getName());
-		jArray.add(jObject.clone());
-		jObject.clear();
 
-		return jArray.toJSONString();
+		return jObject.toJSONString();
 	}
 }
