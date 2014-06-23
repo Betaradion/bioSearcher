@@ -51,7 +51,7 @@ public class BSCharacter extends BSDataStorage {
 			JSONoption.put("id", option.id);
 			JSONoption.put("name", option.name);
 
-			JSONoptions.add(JSONoption);
+			JSONoptions.add(JSONoption.clone());
 
 		}
 
