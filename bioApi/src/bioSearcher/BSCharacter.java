@@ -3,8 +3,8 @@ package bioSearcher;
 public class BSCharacter extends BSDataStorage {
 	private BSOption[] option = new BSOption[2];
 	
-	public BSCharacter(int newId){
-		super(newId);
+	public BSCharacter(int id){
+		super(id);
 		
 		switch(id){
 			case 21:
@@ -32,7 +32,5 @@ public class BSCharacter extends BSDataStorage {
 				break;
 			
 		}
-		
-		
 	}
 }
