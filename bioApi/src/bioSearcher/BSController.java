@@ -21,7 +21,6 @@ public class BSController extends HttpServlet {
 		JSONArray jArray = new JSONArray();
 		JSONObject jObject = new JSONObject();
 
-
 		if (!pathInfo.isEmpty()) {
 			String[] pathSteps = pathInfo.split("/");
 			if (pathSteps.length <= 1) {
