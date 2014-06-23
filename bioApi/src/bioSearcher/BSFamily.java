@@ -36,7 +36,6 @@ public class BSFamily extends BSDataStorage {
 	public String getJSONDescription() {
 		//getJSONDesciption
 		JSONObject jObject = new JSONObject();	
-		JSONArray jArray = new JSONArray();
 
 		jObject.put("id:", BSFamily.this.getId());
 		jObject.put("name:", BSFamily.this.getName());
