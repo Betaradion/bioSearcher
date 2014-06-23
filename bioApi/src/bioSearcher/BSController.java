@@ -21,7 +21,7 @@ public class BSController extends HttpServlet {
 			if (pathSteps.length <= 1) {
 
 				BSFamilies families = new BSFamilies();
-				System.out.print(families.getJSONDescription());
+				response.getWriter().print(families.getJSONDescription());
 			} else {
 				//specific familie_id is given -> handle further action
 				int fId = Integer.parseInt(pathSteps[1]);
@@ -32,15 +32,15 @@ public class BSController extends HttpServlet {
 						//Handle Character
 						BSFamily family = new BSFamily(fId);
 
-						System.out.print(family.getJSONDescription());
+						response.getWriter().print(family.getJSONDescription());
 					}
 				} else {
 					BSFamily family = new BSFamily(fId);
-					System.out.print(family.getJSONDescription());	
+					response.getWriter().print(family.getJSONDescription());	
 				}
 			}
 		} else {
-			System.out.print("No Parameters are given.");
+			response.getWriter().print("No Parameters are given.");
 		}		
 	}
 }

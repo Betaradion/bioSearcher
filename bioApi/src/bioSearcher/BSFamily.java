@@ -37,8 +37,8 @@ public class BSFamily extends BSDataStorage {
 		//getJSONDesciption
 		JSONObject jObject = new JSONObject();	
 
-		jObject.put("id:", BSFamily.this.getId());
-		jObject.put("name:", BSFamily.this.getName());
+		jObject.put("id", BSFamily.this.getId());
+		jObject.put("name", BSFamily.this.getName());
 
 		return jObject.toJSONString();
 	}

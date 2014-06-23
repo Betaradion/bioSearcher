@@ -24,8 +24,8 @@ public class BSFamilies {
 		JSONArray jArray = new JSONArray();
 		
 		for (BSFamily family: families) {
-			jObject.put("id:", family.getId());
-			jObject.put("name:", family.getName());
+			jObject.put("id", family.getId());
+			jObject.put("name", family.getName());
 			jArray.add(jObject.clone());
 			jObject.clear();
 		}
