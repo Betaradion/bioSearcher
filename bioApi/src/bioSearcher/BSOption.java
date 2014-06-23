@@ -1,5 +1,7 @@
 package bioSearcher;
 
+import org.json.simple.JSONObject;
+
 public class BSOption extends BSDataStorage {
 	public BSOption(int id){
 		super(id);
@@ -34,5 +36,14 @@ public class BSOption extends BSDataStorage {
 			break;
 
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public String getJSONDescription() {
+		JSONObject json = new JSONObject();
+		json.put("id", this.id);
+		json.put("name", this.id);
+		
+		return json.toJSONString();
 	}
 }
