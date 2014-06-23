@@ -1,6 +1,6 @@
 package bioSearcher;
 
-public class BSFamilies {
+public class BSFamilies extends BSDataStorage {
 	private BSFamily[] families;
 	
 	public BSFamilies(){

@@ -1,9 +1,7 @@
 package bioSearcher;
 
 
-public class BSFamily {
-	private Integer id;
-	private String name;
+public class BSFamily extends BSDataStorage {
 	private BSCharacter[] characters = new BSCharacter[2];
 	
 	public BSFamily(int newId){
@@ -31,7 +29,7 @@ public class BSFamily {
 		return characters;
 	}
 	
-	public Integer getId(){
+	public int getId(){
 		return id;
 	}
 	
