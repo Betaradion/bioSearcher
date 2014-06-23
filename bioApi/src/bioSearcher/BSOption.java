@@ -4,7 +4,7 @@ public class BSOption extends BSDataStorage {
 	public BSOption(int newId){
 		super(newId);
 		
-		id = newId;
+		this.id = newId;
 
 		
 		switch(id){
@@ -30,10 +30,10 @@ public class BSOption extends BSDataStorage {
 			this.name = "forest";
 			break;
 		case 38:
-			name = "meadow";
+			this.name = "meadow";
 			break;
 		default:
-			name = "Character undefined.";
+			this.name = "Character undefined.";
 			break;
 
 		}
