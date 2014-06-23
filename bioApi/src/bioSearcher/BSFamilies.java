@@ -3,15 +3,17 @@ package bioSearcher;
 public class BSFamilies extends BSDataStorage {
 	private BSFamily[] families;
 	
-	public BSFamilies(){
-		families = new BSFamily[2];
+	public BSFamilies(int id){
+		super(id);
 		
-		families[0] = new BSFamily(11);
-		families[1] = new BSFamily(12);
+		this.families = new BSFamily[2];
+		
+		this.families[0] = new BSFamily(11);
+		this.families[1] = new BSFamily(12);
 	}
 	
 	public BSFamily[] getFamilies() {
-		return families;
+		return this.families;
 	}
 
 }
