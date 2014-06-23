@@ -32,13 +32,15 @@ public class BSFamily extends BSDataStorage {
 		return this.characters;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public String getJSONDescription() {
 		//getJSONDesciption
 		JSONObject jObject = new JSONObject();	
 		
 			jObject.clear();
-			jObject.put(BSFamily.this.id, BSFamily.this.name);
+			jObject.put("id", BSFamily.this.id);
+			jObject.put("name", BSFamily.this.name);
 		
 		return jObject.toJSONString();
 	}
