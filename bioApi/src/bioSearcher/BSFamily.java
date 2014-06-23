@@ -34,15 +34,13 @@ public class BSFamily extends BSDataStorage {
 
 	@Override
 	public String getJSONDescription() {
+		//getJSONDesciption
 		JSONObject jObject = new JSONObject();	
 		
 			jObject.clear();
 			jObject.put(BSFamily.this.id, BSFamily.this.name);
-			
-		System.out.print(jObject);
 		
-		
-		return null;
+		return jObject.toJSONString();
 	}
 	
 
