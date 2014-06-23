@@ -48,7 +48,6 @@ public class BSController extends HttpServlet {
 						System.out.print(family.getJSONDescription());
 					}
 				} else {
-					// Handle Family
 					BSFamily family = new BSFamily(fId);
 					System.out.print(family.getJSONDescription());	
 				}
