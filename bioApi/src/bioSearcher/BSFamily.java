@@ -1,5 +1,8 @@
 package bioSearcher;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 
 public class BSFamily extends BSDataStorage {
 	private BSCharacter[] characters = new BSCharacter[2];
@@ -28,5 +31,20 @@ public class BSFamily extends BSDataStorage {
 	public BSCharacter[] getCharacters() {
 		return this.characters;
 	}
+
+	@Override
+	public String getJSONDescription() {
+		JSONObject jObject = new JSONObject();	
+		
+			jObject.clear();
+			jObject.put(BSFamily.this.id, BSFamily.this.name);
+			
+		System.out.print(jObject);
+		
+		
+		return null;
+	}
+	
+
 
 }
