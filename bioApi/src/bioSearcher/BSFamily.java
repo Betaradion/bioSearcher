@@ -2,7 +2,6 @@ package bioSearcher;
 
 import org.json.simple.JSONObject;
 
-
 public class BSFamily extends BSDataStorage {
 	private BSCharacter[] characters = new BSCharacter[2];
 	
@@ -43,7 +42,4 @@ public class BSFamily extends BSDataStorage {
 		
 		return jObject.toJSONString();
 	}
-	
-
-
 }
