@@ -47,7 +47,7 @@ public class BSController extends HttpServlet {
 
 						BSFamily family= new BSFamily(fId);
 
-						for (BSCharacter character: family.getCharacters()) {
+						for (BSDataStorage character: family.getCharacters()) {
 							jObject.clear();
 							jObject.put(character.getId(), character.getName());
 							jArray.add(jObject.clone());
