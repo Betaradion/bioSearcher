@@ -1,11 +1,8 @@
 package bioSearcher;
 
 public class BSOption extends BSDataStorage {
-	public BSOption(int newId){
-		super(newId);
-		
-		this.id = newId;
-
+	public BSOption(int id){
+		super(id);
 		
 		switch(id){
 		case 31:
@@ -37,13 +34,5 @@ public class BSOption extends BSDataStorage {
 			break;
 
 		}
-	}
-
-	public int getId(){
-		return this.id;
-	}
-
-	public String getName(){
-		return this.name;
 	}
 }
