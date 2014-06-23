@@ -25,13 +25,11 @@ public class BSFamilies {
 		
 		for (BSFamily family: families) {
 			jObject.put("id:", family.getId());
-			jArray.add(jObject.clone());
-			jObject.clear();
 			jObject.put("name:", family.getName());
 			jArray.add(jObject.clone());
 			jObject.clear();
 		}
 		
-		return jObject.toJSONString();
+		return jArray.toJSONString();
 	}
 }
