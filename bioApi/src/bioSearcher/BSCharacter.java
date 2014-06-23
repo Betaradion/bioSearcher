@@ -1,12 +1,10 @@
 package bioSearcher;
 
-public class BSCharacter {
-	private int id;
-	private String name;
+public class BSCharacter extends BSDataStorage {
 	private BSOption[] option = new BSOption[2];
 	
 	public BSCharacter(int newId){
-		id = newId;
+		super(newId);
 		
 		switch(id){
 			case 21:
@@ -36,13 +34,5 @@ public class BSCharacter {
 		}
 		
 		
-	}
-	
-	public int getId(){
-		return id;
-	}
-	
-	public String getName(){
-		return name;
 	}
 }
