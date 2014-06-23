@@ -16,6 +16,7 @@ public class BSFamilies {
 		return families;
 	}
 
+	@SuppressWarnings("unchecked")
 	public String getJSONDescription() {
 		//getJSONDesciption
 		JSONObject jObject = new JSONObject();	
