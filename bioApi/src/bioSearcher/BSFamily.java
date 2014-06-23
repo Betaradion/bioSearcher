@@ -1,5 +1,6 @@
 package bioSearcher;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class BSFamily extends BSDataStorage {
@@ -35,10 +36,15 @@ public class BSFamily extends BSDataStorage {
 	public String getJSONDescription() {
 		//getJSONDesciption
 		JSONObject jObject = new JSONObject();	
+		JSONArray jArray = new JSONArray();
 
-			jObject.put("id", BSFamily.this.id);
-			jObject.put("name", BSFamily.this.name);
-		
+				jObject.put("id:", BSFamily.this.getId());
+				jArray.add(jObject.clone());
+				jObject.clear();
+				jObject.put("name:", BSFamily.this.getName());
+				jArray.add(jObject.clone());
+				jObject.clear();
+			
 		return jObject.toJSONString();
 	}
 }

@@ -1,5 +1,6 @@
 package bioSearcher;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class BSFamilies {
@@ -19,11 +20,16 @@ public class BSFamilies {
 	@SuppressWarnings("unchecked")
 	public String getJSONDescription() {
 		//getJSONDesciption
-		JSONObject jObject = new JSONObject();	
+		JSONObject jObject = new JSONObject();
+		JSONArray jArray = new JSONArray();
 		
 		for (BSFamily family: families) {
-			jObject.put("ID:", family.getId());
-			jObject.put("Name:", family.getName());
+			jObject.put("id:", family.getId());
+			jArray.add(jObject.clone());
+			jObject.clear();
+			jObject.put("name:", family.getName());
+			jArray.add(jObject.clone());
+			jObject.clear();
 		}
 		
 		return jObject.toJSONString();
