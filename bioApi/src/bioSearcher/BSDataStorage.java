@@ -1,6 +1,6 @@
 package bioSearcher;
 
-public class BSDataStorage {
+public abstract class BSDataStorage {
 
 	protected int id = 0;
 	protected String name = "";
@@ -16,5 +16,7 @@ public class BSDataStorage {
 	public String getName() {
 		return name;
 	}
+	
+	public abstract String getJSONDescription();
 
 }
