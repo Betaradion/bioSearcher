@@ -1,5 +1,7 @@
 package bioSearcher;
 
+import org.json.simple.JSONObject;
+
 public class BSFamilies {
 	private BSFamily[] families;
 	
@@ -14,4 +16,15 @@ public class BSFamilies {
 		return families;
 	}
 
+	public String getJSONDescription() {
+		//getJSONDesciption
+		JSONObject jObject = new JSONObject();	
+		
+		for (BSFamily family: families) {
+			jObject.put("ID:", family.getId());
+			jObject.put("Name:", family.getName());
+		}
+		
+		return jObject.toJSONString();
+	}
 }
