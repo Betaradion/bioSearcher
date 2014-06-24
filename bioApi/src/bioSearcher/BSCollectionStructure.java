@@ -1,7 +1,7 @@
 package bioSearcher;
 
 public abstract class BSCollectionStructure {
-	private BSDataStructure [] collection;
+	private BSDataStructure[] collection;
 	
 	public BSCollectionStructure(){
 		
@@ -13,7 +13,7 @@ public abstract class BSCollectionStructure {
 		return getJSONDescription(0);
 	}
 	
-	public abstract void loadSubModules(int y);
+	public abstract void loadSubModules(int levels);
 	
 	public void loadSubModules() {
 		loadSubModules(1000);

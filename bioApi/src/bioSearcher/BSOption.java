@@ -2,7 +2,7 @@ package bioSearcher;
 
 import org.json.simple.JSONObject;
 
-public class BSOption extends BSDataStorage {
+public class BSOption extends BSDataStructure {
 	public BSOption(int id){
 		super(id);
 		
@@ -46,4 +46,12 @@ public class BSOption extends BSDataStorage {
 		
 		return json.toJSONString();
 	}
+
+	@Override
+	public String getJSONDescription(int levels) {
+		return getJSONDescription();
+	}
+
+	@Override
+	public void loadSubmodules(int levels) {}
 }
