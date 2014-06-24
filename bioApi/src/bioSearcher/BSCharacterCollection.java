@@ -1,57 +1,35 @@
 package bioSearcher;
 
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
-public class BSCharacterCollection extends BSCollectionStructure{
+public abstract class BSCharacterCollection  extends BSCollectionStructure{
 	private BSCharacter[] characters;
-	int id;
 
-	public BSCharacterCollection(int id) {
+	public BSCharacterCollection(){
 		super();
-		
-		characters = new BSCharacter[2];
-
-		switch(id){
-		case 11:
-			this.characters[0] = new BSCharacter(21);
-			this.characters[1] = new BSCharacter(22);
-			break;
-		case 12: 
-			this.characters[0] = new BSCharacter(23);
-			this.characters[1] = new BSCharacter(24);
-			break;
-		default:
-			break;
-		}
 	}
 
 	@SuppressWarnings("unchecked")
-	public String getJSONDescription() {
-		//TODO
-		JSONObject json = new JSONObject();
-		JSONArray JSONoptions = new JSONArray();
-
-		json.put("id", this.id);
-		json.put("option1", this.characters[0]);
-		json.put("option1", this.characters[1]);
-
-		JSONoptions.add(json.clone());
-
-		json.clear();
-
-		return JSONoptions.toJSONString();
+	public String getJSONDescription(int levels) {
+		JSONArray jArray = new JSONArray();
+		for (BSDataStructure data : characters) {
+			jArray.add(data.getJSONDescription(levels -1));
+		}
+		return jArray.toJSONString();
 	}
 
-	@Override
-	public String getJSONDescription(int n) {
-		return getJSONDescription() + getJSONDescription(n);
+	public String getJSONDescription(){
+		return getJSONDescription(0);
 	}
 
-	@Override
 	public void loadSubModules(int levels) {
-		// TODO Auto-generated method stub
-		
+		for (BSDataStructure data : collection) {
+			data.loadSubmodules(levels - 1);
+		}
+	}
+
+	public void loadSubModules() {
+		loadSubModules(1000);
 	}
 
 }
