@@ -2,11 +2,13 @@ package bioSearcher;
 
 import org.json.simple.JSONObject;
 
-public class BSFamily extends BSDataStorage {
-	private BSCharacter[] characters = new BSCharacter[2];
+public class BSFamily extends BSDataStructure {
+	private BSCharacterCollection characters;
 
 	public BSFamily(int id){
 		super(id);
+		
+		characters = new BSCharacterCollection(id);
 
 		switch(id){
 		case 11:
@@ -26,7 +28,7 @@ public class BSFamily extends BSDataStorage {
 
 	}
 
-	public BSCharacter[] getCharacters() {
+	public BSCharacterCollection getCharacters() {
 		return this.characters;
 	}
 
@@ -40,5 +42,17 @@ public class BSFamily extends BSDataStorage {
 		jObject.put("name", BSFamily.this.getName());
 
 		return jObject.toJSONString();
+	}
+
+	@Override
+	public String getJSONDescription(int levels) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void loadSubmodules(int levels) {
+		// TODO Auto-generated method stub
+		
 	}
 }
