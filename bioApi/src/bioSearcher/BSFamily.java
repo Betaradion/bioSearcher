@@ -28,7 +28,7 @@ public class BSFamily extends BSDataStructure {
 
 	}
 
-	public BSCharacter[] getCharacters() {
+	public BSCharacterCollection getCharacters() {
 		return this.characters;
 	}
 
