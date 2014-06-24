@@ -1,12 +1,12 @@
 package bioSearcher;
 
-public abstract class BSDataStorage {
+public abstract class BSDataStructure {
 
 	protected int id = 0;
 	protected String name = "";
 
-	public BSDataStorage(int newId) {
-		id = newId;
+	public BSDataStructure(int id) {
+		this.id = id;
 	}
 
 	public int getId() {
@@ -18,5 +18,9 @@ public abstract class BSDataStorage {
 	}
 	
 	public abstract String getJSONDescription();
-
+	
+	public abstract void loadSubmodules(int levels);
+	public  void loadSubmodules() {
+		loadSubmodules(1000);
+	}
 }
