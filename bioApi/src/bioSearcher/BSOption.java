@@ -53,7 +53,5 @@ public class BSOption extends BSDataStructure {
 	}
 
 	@Override
-	public void loadSubmodules(int levels) {
-		
-	}
+	public void loadSubmodules(int levels) {}
 }
