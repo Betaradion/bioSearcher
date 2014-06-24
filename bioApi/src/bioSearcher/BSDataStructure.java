@@ -17,9 +17,13 @@ public abstract class BSDataStructure {
 		return name;
 	}
 	
-	public abstract String getJSONDescription();
+	public abstract String getJSONDescription(int levels);
+	public String getJSONDescription() {
+		return getJSONDescription(0);
+	}
 	
 	public abstract void loadSubmodules(int levels);
+	
 	public  void loadSubmodules() {
 		loadSubmodules(1000);
 	}
