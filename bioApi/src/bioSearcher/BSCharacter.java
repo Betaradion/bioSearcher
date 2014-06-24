@@ -3,12 +3,14 @@ package bioSearcher;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class BSCharacter extends BSDataStorage {
-	private BSOption[] options = new BSOption[2];
+public class BSCharacter extends BSDataStructure {
+	protected BSOptionCollection options;
 
 	public BSCharacter(int id){
 		super(id);
-
+		
+		options = new BSOptionCollection(id);
+		
 		switch(id){
 		case 21:
 			this.name = "Size";
@@ -58,5 +60,19 @@ public class BSCharacter extends BSDataStorage {
 		json.put("options",	JSONoptions);
 
 		return json.toJSONString();
+	}
+
+
+	@Override
+	public String getJSONDescription(int levels) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void loadSubmodules(int levels) {
+		// TODO Auto-generated method stub
+		
 	}
 }
