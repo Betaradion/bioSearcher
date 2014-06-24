@@ -23,7 +23,7 @@ public abstract class BSCharacterCollection  extends BSCollectionStructure{
 	}
 
 	public void loadSubModules(int levels) {
-		for (BSDataStructure data : collection) {
+		for (BSDataStructure data : characters) {
 			data.loadSubmodules(levels - 1);
 		}
 	}
