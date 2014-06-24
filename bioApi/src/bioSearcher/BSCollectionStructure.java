@@ -13,7 +13,7 @@ public abstract class BSCollectionStructure {
 		return getJSONDescription(0);
 	}
 	
-	public abstract void loadSubModules(int y);
+	public abstract void loadSubModules(int n);
 	
 	public void loadSubModules() {
 		loadSubModules(1000);
