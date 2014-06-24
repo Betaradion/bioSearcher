@@ -1,7 +1,7 @@
 package bioSearcher;
 
 public abstract class BSCollectionStructure {
-	private BSDataStructure [] collection;
+	private BSDataStructure[] collection;
 	
 	public BSCollectionStructure(){
 		
