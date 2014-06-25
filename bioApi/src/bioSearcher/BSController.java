@@ -20,7 +20,7 @@ public class BSController extends HttpServlet {
 			String[] pathSteps = pathInfo.split("/");
 			if (pathSteps.length <= 1) {
 
-				BSFamilies families = new BSFamilies();
+				BSFamilyCollection families = new BSFamilyCollection();
 				response.getWriter().print(families.getJSONDescription());
 			} else {
 				//specific familie_id is given -> handle further action
