@@ -1,4 +1,6 @@
-package bioSearcher;
+package de.betaradion.biosearcher.model.raw;
+
+import org.json.simple.JSONObject;
 
 public abstract class BSDataStructure {
 
@@ -16,15 +18,16 @@ public abstract class BSDataStructure {
 	public String getName() {
 		return name;
 	}
-	
-	public abstract String getJSONDescription(int levels);
-	public String getJSONDescription() {
+
+	public abstract JSONObject getJSONDescription(int levels);
+
+	public JSONObject getJSONDescription() {
 		return getJSONDescription(0);
 	}
-	
+
 	public abstract void loadSubmodules(int levels);
-	
-	public  void loadSubmodules() {
+
+	public void loadSubmodules() {
 		loadSubmodules(1000);
 	}
 }

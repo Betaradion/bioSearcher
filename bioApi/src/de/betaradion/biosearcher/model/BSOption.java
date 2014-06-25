@@ -1,12 +1,14 @@
-package bioSearcher;
+package de.betaradion.biosearcher.model;
 
 import org.json.simple.JSONObject;
 
+import de.betaradion.biosearcher.model.raw.BSDataStructure;
+
 public class BSOption extends BSDataStructure {
-	public BSOption(int id){
+	public BSOption(int id) {
 		super(id);
-		
-		switch(id){
+
+		switch (id) {
 		case 31:
 			this.name = "big";
 			break;
@@ -15,7 +17,7 @@ public class BSOption extends BSDataStructure {
 			break;
 		case 33:
 			this.name = "bright";
-			break; 
+			break;
 		case 34:
 			this.name = "dark";
 			break;
@@ -40,14 +42,15 @@ public class BSOption extends BSDataStructure {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public String getJSONDescription(int levels) {
+	public JSONObject getJSONDescription(int levels) {
 		JSONObject json = new JSONObject();
 		json.put("id", this.id);
-		json.put("name", this.id);
-		
-		return json.toJSONString();
+		json.put("name", this.name);
+
+		return json;
 	}
 
 	@Override
-	public void loadSubmodules(int levels) {}
+	public void loadSubmodules(int levels) {
+	}
 }
