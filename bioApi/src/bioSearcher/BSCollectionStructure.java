@@ -3,7 +3,7 @@ package bioSearcher;
 import org.json.simple.JSONArray;
 
 public abstract class BSCollectionStructure {
-	private BSDataStructure[] collection;
+	protected BSDataStructure[] collection;
 	
 	public BSCollectionStructure(){
 		

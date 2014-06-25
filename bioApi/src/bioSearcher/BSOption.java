@@ -39,17 +39,13 @@ public class BSOption extends BSDataStructure {
 	}
 
 	@SuppressWarnings("unchecked")
-	public String getJSONDescription() {
+	@Override
+	public String getJSONDescription(int levels) {
 		JSONObject json = new JSONObject();
 		json.put("id", this.id);
 		json.put("name", this.id);
 		
 		return json.toJSONString();
-	}
-
-	@Override
-	public String getJSONDescription(int levels) {
-		return getJSONDescription();
 	}
 
 	@Override

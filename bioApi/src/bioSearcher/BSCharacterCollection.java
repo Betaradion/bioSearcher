@@ -1,35 +1,23 @@
 package bioSearcher;
 
-import org.json.simple.JSONArray;
 
-public abstract class BSCharacterCollection  extends BSCollectionStructure{
-	private BSCharacter[] characters;
+public class BSCharacterCollection  extends BSCollectionStructure{
 
-	public BSCharacterCollection(){
+	public BSCharacterCollection(int id) {
 		super();
-	}
 
-	@SuppressWarnings("unchecked")
-	public String getJSONDescription(int levels) {
-		JSONArray jArray = new JSONArray();
-		for (BSDataStructure data : characters) {
-			jArray.add(data.getJSONDescription(levels -1));
+		switch(id){
+		case 11:
+			this.collection[0] = new BSCharacter(21);
+			this.collection[1] = new BSCharacter(22);
+			break;
+		case 12: 
+			this.collection[0] = new BSCharacter(23);
+			this.collection[1] = new BSCharacter(24);
+			break;
+		default:
+			break;
 		}
-		return jArray.toJSONString();
-	}
-
-	public String getJSONDescription(){
-		return getJSONDescription(0);
-	}
-
-	public void loadSubModules(int levels) {
-		for (BSDataStructure data : characters) {
-			data.loadSubmodules(levels - 1);
-		}
-	}
-
-	public void loadSubModules() {
-		loadSubModules(1000);
 	}
 
 }
