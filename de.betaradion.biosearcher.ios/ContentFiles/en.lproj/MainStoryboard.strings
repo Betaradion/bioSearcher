@@ -1,0 +1,75 @@
+
+/* Class = "IBUIBarButtonItem"; title = "Find"; ObjectID = "1J9-gs-Pyn"; */
+"1J9-gs-Pyn.title" = "Find";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "1KS-ek-y4z"; */
+"1KS-ek-y4z.text" = "Title";
+
+/* Class = "IBUINavigationItem"; title = "Possible results"; ObjectID = "3pC-3u-6tS"; */
+"3pC-3u-6tS.title" = "Possible results";
+
+/* Class = "IBUIButton"; normalTitle = "Save"; ObjectID = "4fS-KT-4P0"; */
+"4fS-KT-4P0.normalTitle" = "Save";
+
+/* Class = "IBUITabBarItem"; title = "Search"; ObjectID = "7ap-IG-MMl"; */
+"7ap-IG-MMl.title" = "Search";
+
+/* Class = "IBUINavigationItem"; title = "Species"; ObjectID = "7tf-Qu-wlA"; */
+"7tf-Qu-wlA.title" = "Species";
+
+/* Class = "IBUINavigationItem"; title = "Animal Families"; ObjectID = "DJs-BT-yaP"; */
+"DJs-BT-yaP.title" = "Animal Families";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "FIi-E1-bkr"; */
+"FIi-E1-bkr.text" = "Title";
+
+/* Class = "IBUINavigationItem"; title = "Characters"; ObjectID = "HGP-XZ-kSU"; */
+"HGP-XZ-kSU.title" = "Characters";
+
+/* Class = "IBUINavigationItem"; title = "Animal Families"; ObjectID = "Mrs-9b-e2t"; */
+"Mrs-9b-e2t.title" = "Families";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "Pgz-Hs-YFj"; */
+"Pgz-Hs-YFj.text" = "Title";
+
+/* Class = "IBUIButton"; normalTitle = "Reset value for \nselected Character"; ObjectID = "YHE-sd-WTQ"; */
+"YHE-sd-WTQ.normalTitle" = "Reset value for \nselected Character";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "b8U-OR-dBA"; */
+"b8U-OR-dBA.text" = "Title";
+
+/* Class = "IBUITabBarItem"; title = "Home"; ObjectID = "bZi-ac-VP2"; */
+"bZi-ac-VP2.title" = "Home";
+
+/* Class = "IBUITabBarItem"; title = "About"; ObjectID = "ddv-d1-9O3"; */
+"ddv-d1-9O3.title" = "About";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "lO1-cH-E2W"; */
+"lO1-cH-E2W.text" = "Title";
+
+/* Class = "IBUILabel"; text = "Detail"; ObjectID = "nPY-1R-JgK"; */
+"nPY-1R-JgK.text" = "Detail";
+
+/* Class = "IBUIViewController"; title = "Einstellungen"; ObjectID = "owR-3H-hAa"; */
+"owR-3H-hAa.title" = "Einstellungen";
+
+/* Class = "IBUILabel"; text = "About"; ObjectID = "r24-y4-wr2"; */
+"r24-y4-wr2.text" = "About";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "tOq-OK-lJ2"; */
+"tOq-OK-lJ2.text" = "Title";
+
+/* Class = "IBUILabel"; text = "Detail"; ObjectID = "tad-fM-xy6"; */
+"tad-fM-xy6.text" = "Detail";
+
+/* Class = "IBUITabBarItem"; title = "Overview"; ObjectID = "tlt-O1-jRn"; */
+"tlt-O1-jRn.title" = "Overview";
+
+/* Class = "IBUITextView"; text = "BioSearcher-Version:   1.0\n\nContact:\nE-Mail:      betaradion@hotmail.com\nFacebook: www.facebook.com/betaradion"; ObjectID = "umP-xq-Wjj"; */
+"umP-xq-Wjj.text" = "BioSearcher-Version:   1.0\n\nContact:\nE-Mail:      betaradion@hotmail.com\nFacebook: www.facebook.com/betaradion";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "wj3-lH-kLx"; */
+"wj3-lH-kLx.text" = "Title";
+
+/* Class = "IBUILabel"; text = "Detail"; ObjectID = "zZt-Ur-9lH"; */
+"zZt-Ur-9lH.text" = "Detail";
