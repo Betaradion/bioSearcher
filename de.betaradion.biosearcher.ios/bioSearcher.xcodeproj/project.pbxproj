@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		412677D9173920AC004301ED /* intro.html in Resources */ = {isa = PBXBuildFile; fileRef = 412677DB173920AC004301ED /* intro.html */; };
 		412677E417392F5D004301ED /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 412677E317392F5D004301ED /* MBProgressHUD.m */; };
+		5B07EE2C195C1CCF004271B8 /* JSONConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B07EE2B195C1CCF004271B8 /* JSONConnection.m */; };
 		5B38404917411EFD0077820C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5B38404B17411EFD0077820C /* Localizable.strings */; };
 		5B8006C6174A883B0031B266 /* aboutText.html in Resources */ = {isa = PBXBuildFile; fileRef = 5B8006C8174A883B0031B266 /* aboutText.html */; };
 		5B8006CB174AA71E0031B266 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B8006CA174AA71E0031B266 /* Default.png */; };
@@ -58,6 +59,8 @@
 		412677DC173920AE004301ED /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/intro.html; sourceTree = "<group>"; };
 		412677E217392F5D004301ED /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		412677E317392F5D004301ED /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		5B07EE2A195C1CCF004271B8 /* JSONConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONConnection.h; path = JSONConnection/JSONConnection.h; sourceTree = "<group>"; };
+		5B07EE2B195C1CCF004271B8 /* JSONConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONConnection.m; path = JSONConnection/JSONConnection.m; sourceTree = "<group>"; };
 		5B38404A17411EFD0077820C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5B38404C17411F060077820C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5B8006C7174A883B0031B266 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/aboutText.html; sourceTree = "<group>"; };
@@ -207,6 +210,8 @@
 		F31A44C31673B60E007EC202 /* Connection */ = {
 			isa = PBXGroup;
 			children = (
+				5B07EE2A195C1CCF004271B8 /* JSONConnection.h */,
+				5B07EE2B195C1CCF004271B8 /* JSONConnection.m */,
 				F31243AA165EC3610064D03D /* Connection.h */,
 				F31243AB165EC3610064D03D /* Connection.m */,
 				F3DA521017429494002B98A6 /* pListConnection.h */,
@@ -523,6 +528,7 @@
 				F3DA520F17429419002B98A6 /* imageConnection.m in Sources */,
 				F3DA521217429494002B98A6 /* pListConnection.m in Sources */,
 				5BFD432E1743990C001692D6 /* PopoverView.m in Sources */,
+				5B07EE2C195C1CCF004271B8 /* JSONConnection.m in Sources */,
 				F362894C17C0C62600261158 /* WebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
