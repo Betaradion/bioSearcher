@@ -83,20 +83,4 @@
     
 }
 
--(void)loadFamiliesFromServer:(NSString *)type
-{
-    
-}
-
--(void)loadFromServer:(NSString *)type parentId:(NSString*)parentId
-{
-    
-}
-
--(void)loadSpeciesFromServer:(NSString *)type options:(NSMutableDictionary*)options family:(NSDictionary*)family
-{
-    
-}
-
-
 @end
