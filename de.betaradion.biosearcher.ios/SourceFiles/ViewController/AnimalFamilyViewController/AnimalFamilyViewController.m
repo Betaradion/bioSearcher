@@ -22,7 +22,7 @@
 {
     [super viewDidLoad];
     self.selectedFamily = [[NSDictionary alloc] init];
-    self.families = [[NSDictionary alloc] init];
+    self.families = [[NSArray alloc] init];
 
 }
 
@@ -33,16 +33,15 @@
         [self showHud:animated];
         
         JSONConnection *conn = [[JSONConnection alloc] init];
-        [conn connect:@"" forDatafield:@"families"];
+        [conn loadData:DataTypeFamilies forParentId:@""];
     }
-
 }
 
 - (void)refreshAction
 {
     [self showHud:YES];
     JSONConnection *conn = [[JSONConnection alloc] init];
-    [conn loadFamiliesFromServer:@"families"];
+    [conn loadData:DataTypeFamilies forParentId:@""];
     self.families = [NSArray array];
 }
 

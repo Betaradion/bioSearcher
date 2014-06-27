@@ -39,7 +39,8 @@
         [self showHud:animated];
         
         JSONConnection *conn = [[JSONConnection alloc] init];
-        [conn loadFromServer:@"profile" parentId:self.species[@"SID"]];
+        [conn loadData:DataTypeProfile forParentId:self.species[@"SID"]];
+        
         
     }
     self.title = self.species[@"name"];
@@ -54,7 +55,7 @@
 {
     [self showHud:YES];
     JSONConnection *conn = [[JSONConnection alloc] init];
-    [conn loadFromServer:@"profile" parentId:self.species[@"SID"]];
+    [conn loadData:DataTypeProfile forParentId:self.species[@"SID"]];
     
 }
 
@@ -145,8 +146,7 @@
         [cell setSelectedBackgroundView:[self createSelectedBackgroundView:cell.frame]];
         cell.textLabel.font = cellFont;
         
-        NSDictionary *currentProfileRow = self.profile[indexPath.row];
-        
+        NSDictionary *currentProfileRow = self.profile[[NSString stringWithFormat:@"%i", indexPath.row]];
         
         //Aus der aktuellen Reihe den String "vorname" auslesen und dem Tabellenlabes gleichsetzen.
         cell.textLabel.text = currentProfileRow[@"name"];

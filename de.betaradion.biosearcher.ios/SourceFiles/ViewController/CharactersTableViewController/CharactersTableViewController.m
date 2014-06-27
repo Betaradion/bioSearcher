@@ -32,8 +32,7 @@
     if(self.characters.count == 0){
         [self showHud:animated];
         JSONConnection* conn = [[JSONConnection alloc] init];
-        //[conn loadFromServer:@"characters" parentId:self.family[@"FID"]];
-        [conn connect:@"" forDatafield:@"characters"];
+        [conn loadData:@"DataTypeCharacters" forParentId:self.family[@"FID"]];
     }
     self.title = self.family[@"name"];
     
@@ -43,7 +42,7 @@
 {
     [self showHud:YES];
     JSONConnection *conn = [[JSONConnection alloc] init];
-    [conn loadFromServer:@"characters" parentId:self.family[@"FID"]];
+    [conn loadData:@"DataTypeCharacters" forParentId:self.family[@"FID"]];
     
     // weil durch das refreshen potenziell Einträge aus der
     // Liste der Charakteristika verschwinden bzw sich verschieben
@@ -171,7 +170,8 @@
     [self showHud:YES];
     
     JSONConnection* conn = [[JSONConnection alloc] init];
-    [conn loadFromServer:@"options" parentId:self.selectedCharacter[@"CID"]];
+    [conn loadData:@"DataTypeOptions" forParentId:self.selectedCharacter[@"CID"]];
+
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
