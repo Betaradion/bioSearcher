@@ -7,7 +7,7 @@
 //
 
 #import "AnimalFamilyViewController.h"
-#import "pListConnection.h"
+#import "JSONConnection.h"
 #import "CharactersTableViewController.h"
 #import "ResultTableViewController.h"
 #import "Flurry.h"
@@ -32,8 +32,8 @@
     if(self.families.count == 0){
         [self showHud:animated];
         
-        pListConnection *conn = [[pListConnection alloc] init];
-        [conn loadFamilysFromServer:@"families"];
+        JSONConnection *conn = [[JSONConnection alloc] init];
+        [conn connect:@"leck mich" forDatafield:@"families"];
     }
 
 }
@@ -41,9 +41,9 @@
 - (void)refreshAction
 {
     [self showHud:YES];
-    pListConnection *conn = [[pListConnection alloc] init];
-    [conn loadFamilysFromServer:@"families"];
-    self.families = [NSDictionary dictionary];
+    JSONConnection *conn = [[JSONConnection alloc] init];
+    [conn loadFamiliesFromServer:@"families"];
+    self.families = [NSArray array];
 }
 
 
@@ -54,7 +54,7 @@
     NSString* field = info[@"loadedField"];
     if ([field isEqualToString:@"families"])
     {
-        self.families = info[@"families"];
+        self.families = info[@"JSONArray"];
         [self.refreshControl endRefreshing];
         [self hideHud:YES];
         [self.tableView reloadData];
@@ -86,7 +86,7 @@
     NSString *row = [NSString stringWithFormat:@"%i",indexPath.row + 1];
     //Reihe plus 1 setzten weil nullbasierend
     
-    NSDictionary *currentFamily = self.families[row];
+    NSDictionary *currentFamily = self.families[indexPath.row];
     
 
     //Aus der aktuellen Reihe den String "vorname" auslesen und dem Tabellenlabes gleichsetzen.
@@ -104,7 +104,7 @@
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     NSString *row = [NSString stringWithFormat:@"%i",indexPath.row + 1];
-    self.selectedFamily = [self.families objectForKey:row];
+//    self.selectedFamily = [self.families objectForKey:row];
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
    

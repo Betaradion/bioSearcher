@@ -10,38 +10,63 @@
 
 @implementation JSONConnection
 
--(void)connect:(NSString *)sqlParameter forDatafield:(NSString*)field
+-(void)connect:(NSString *)jsonParameter forDatafield:(NSString*)field
 {
-    self.field = field;
-    NSURLRequest *request = [self buildPListRequest:sqlParameter];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    [self networkActivity:YES];
-    [connection start];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", webPath, field]]];
+    
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [conn start];
 }
+
+-(void)connectionDidFinishLoading:(NSURLConnection*)connection
+{
+    NSError *error = nil;
+    id object = [NSJSONSerialization
+                 JSONObjectWithData:self.receivedData
+                 options:0
+                 error:&error];
+    
+    if ([NSJSONSerialization isValidJSONObject:object])
+    {
+        NSLog(@"Completed!");
+        
+        //        [[NSNotificationCenter defaultCenter] postNotificationName:@"DidFailLoadingFromNetworkNotification"
+        //                                                            object:self
+        //                                                          userInfo:@{ @"loadedField" : self.field}];
+        
+        
+        if([object isKindOfClass:[NSArray class]])
+        {
+            NSDictionary *results = object;
+           
+            NSLog(@"%@", results);
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DidFinishLoadingFromNetworkNotification"
+                                                                object:self
+                                                              userInfo:@{ @"loadedField" : @"families", @"JSONArray" : results}];
+        }
+    } else {
+        NSLog(@"Error");
+    }
+    
+    [self networkActivity:NO];
+    
+   }
 
 -(void)loadFamiliesFromServer:(NSString *)type
 {
-    NSString* httpRequest = [[NSString alloc] init];
-    if ([type isEqual: @"families"]) {
-        httpRequest = [NSString stringWithFormat:@"%@ %@",  webPath , @"families/"];
-        [self connect:httpRequest forDatafield:@"families"];
-    }
+    
 }
 
--(NSMutableURLRequest*)buildPListRequest:(NSString *)sqlParameter
+-(void)loadFromServer:(NSString *)type parentId:(NSString*)parentId
 {
-    NSData *postData = [sqlParameter dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:NO];
-    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
     
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL: [NSURL URLWithString:webPath]];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:postData];
-    
-    return request;
 }
+
+-(void)loadSpeciesFromServer:(NSString *)type options:(NSMutableDictionary*)options family:(NSDictionary*)family
+{
+    
+}
+
 
 @end

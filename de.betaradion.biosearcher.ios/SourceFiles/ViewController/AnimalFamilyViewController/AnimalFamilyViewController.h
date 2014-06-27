@@ -11,7 +11,7 @@
 
 @interface AnimalFamilyViewController : BSTableViewController
 @property (nonatomic, strong) NSDictionary* selectedFamily;
-@property (nonatomic, strong) NSDictionary* families;
+@property (nonatomic, strong) NSArray* families;
 - (void)refreshAction;
 
 @end

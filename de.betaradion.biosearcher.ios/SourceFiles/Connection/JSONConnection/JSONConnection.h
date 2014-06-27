@@ -8,7 +8,7 @@
 
 #import "Connection.h"
 
-#define webPath @"http://biosearcher.sytes.net/rest/"
+#define webPath @"http://localhost:8080/rest_service/rest/"
 
 @interface JSONConnection : Connection
 
@@ -16,7 +16,5 @@
 -(void)loadFromServer:(NSString *)type parentId:(NSString*)parentId;
 -(void)loadSpeciesFromServer:(NSString *)type options:(NSMutableDictionary*)options family:(NSDictionary*)family;
 -(void)connect:(NSString *)sqlParameter forDatafield:(NSString*)field;
--(NSString *)buildSearchSqlFromOptions:(NSMutableDictionary*)options family:(NSDictionary*)family;
--(NSMutableURLRequest*)buildPListRequest:(NSString *)sqlParameter;
 
 @end

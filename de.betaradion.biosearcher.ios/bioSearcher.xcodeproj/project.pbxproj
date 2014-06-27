@@ -15,12 +15,12 @@
 		5B8006CB174AA71E0031B266 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B8006CA174AA71E0031B266 /* Default.png */; };
 		5B8006CC174AA7270031B266 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F3B668A216DAA07400A9C716 /* Default@2x.png */; };
 		5B8006CE174AA72B0031B266 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B8006CD174AA72B0031B266 /* Default-568h@2x.png */; };
+		5BC96A52195D532D00244F91 /* libFlurry_5.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BC96A51195D532D00244F91 /* libFlurry_5.1.0.a */; };
 		5BE7EFC6173AA103001E4F3F /* AbstractActionSheetPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE7EFBA173AA103001E4F3F /* AbstractActionSheetPicker.m */; };
 		5BE7EFCA173AA103001E4F3F /* ActionSheetStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE7EFC3173AA103001E4F3F /* ActionSheetStringPicker.m */; };
 		5BFD432E1743990C001692D6 /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFD432D1743990C001692D6 /* PopoverView.m */; };
 		AC1958AD195B0EE0007AC2AE /* AnimalFamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1958AC195B0EE0007AC2AE /* AnimalFamilyViewController.m */; };
 		AC1958B0195B0F1E007AC2AE /* InfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1958AF195B0F1E007AC2AE /* InfoTableViewController.m */; };
-		AC1958B3195B11AC007AC2AE /* libFlurry_5.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC1958B2195B11AC007AC2AE /* libFlurry_5.1.0.a */; };
 		F31243AC165EC3610064D03D /* Connection.m in Sources */ = {isa = PBXBuildFile; fileRef = F31243AB165EC3610064D03D /* Connection.m */; };
 		F34574C216A7060800DC6191 /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F34574C116A7060800DC6191 /* ProfileTableViewController.m */; };
 		F362894C17C0C62600261158 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F362894B17C0C62600261158 /* WebViewController.m */; };
@@ -67,6 +67,7 @@
 		5B8006C9174A88400031B266 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/aboutText.html; sourceTree = "<group>"; };
 		5B8006CA174AA71E0031B266 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		5B8006CD174AA72B0031B266 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		5BC96A51195D532D00244F91 /* libFlurry_5.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_5.1.0.a; sourceTree = "<group>"; };
 		5BE7EFB9173AA103001E4F3F /* AbstractActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractActionSheetPicker.h; sourceTree = "<group>"; };
 		5BE7EFBA173AA103001E4F3F /* AbstractActionSheetPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractActionSheetPicker.m; sourceTree = "<group>"; };
 		5BE7EFC2173AA103001E4F3F /* ActionSheetStringPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetStringPicker.h; sourceTree = "<group>"; };
@@ -79,7 +80,6 @@
 		AC1958AE195B0F1E007AC2AE /* InfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoTableViewController.h; path = SourceFiles/ViewController/InfoTableViewController/InfoTableViewController.h; sourceTree = SOURCE_ROOT; };
 		AC1958AF195B0F1E007AC2AE /* InfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoTableViewController.m; path = SourceFiles/ViewController/InfoTableViewController/InfoTableViewController.m; sourceTree = SOURCE_ROOT; };
 		AC1958B1195B11AC007AC2AE /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
-		AC1958B2195B11AC007AC2AE /* libFlurry_5.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_5.1.0.a; sourceTree = "<group>"; };
 		F31243AA165EC3610064D03D /* Connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Connection.h; path = RawConnection/Connection.h; sourceTree = "<group>"; };
 		F31243AB165EC3610064D03D /* Connection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Connection.m; path = RawConnection/Connection.m; sourceTree = "<group>"; };
 		F335EBDF1743D0530050C0CF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -132,8 +132,8 @@
 				F362896617C0F63D00261158 /* Security.framework in Frameworks */,
 				F362896417C0F62C00261158 /* AdSupport.framework in Frameworks */,
 				F362896217C0F5B900261158 /* SystemConfiguration.framework in Frameworks */,
-				AC1958B3195B11AC007AC2AE /* libFlurry_5.1.0.a in Frameworks */,
 				F38EF878165AC5BA00B287F6 /* UIKit.framework in Frameworks */,
+				5BC96A52195D532D00244F91 /* libFlurry_5.1.0.a in Frameworks */,
 				F38EF87A165AC5BA00B287F6 /* Foundation.framework in Frameworks */,
 				F38EF87C165AC5BA00B287F6 /* CoreGraphics.framework in Frameworks */,
 			);
@@ -190,8 +190,8 @@
 		AC1958B4195B11B2007AC2AE /* Flurry Analytics */ = {
 			isa = PBXGroup;
 			children = (
+				5BC96A51195D532D00244F91 /* libFlurry_5.1.0.a */,
 				AC1958B1195B11AC007AC2AE /* Flurry.h */,
-				AC1958B2195B11AC007AC2AE /* libFlurry_5.1.0.a */,
 			);
 			name = "Flurry Analytics";
 			path = Flurry;
@@ -543,8 +543,8 @@
 				412677DC173920AE004301ED /* de */,
 			);
 			name = intro.html;
-			path = ..;
-			sourceTree = "<group>";
+			path = ContentFiles;
+			sourceTree = SOURCE_ROOT;
 		};
 		5B38404B17411EFD0077820C /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
@@ -563,6 +563,7 @@
 				5B8006C9174A88400031B266 /* de */,
 			);
 			name = aboutText.html;
+			path = ../../../ContentFiles;
 			sourceTree = "<group>";
 		};
 		F362895B17C0DB4500261158 /* member.html */ = {
@@ -572,8 +573,8 @@
 				F362895C17C0DB4B00261158 /* en */,
 			);
 			name = member.html;
-			path = ..;
-			sourceTree = "<group>";
+			path = ContentFiles;
+			sourceTree = SOURCE_ROOT;
 		};
 		F38EF880165AC5BA00B287F6 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -665,11 +666,7 @@
 				GCC_PREFIX_HEADER = "SourceFiles/bioSearcher-Prefix.pch";
 				INFOPLIST_FILE = "bioSearcher-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Flurry iPhone SDK viPhone 4/Flurry-iOS-4.2.3/Flurry\"",
-					"$(PROJECT_DIR)/TabbedApp",
-				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/Libraries/Flurry";
 				PRODUCT_NAME = BioSearcher;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -687,11 +684,7 @@
 				GCC_PREFIX_HEADER = "SourceFiles/bioSearcher-Prefix.pch";
 				INFOPLIST_FILE = "bioSearcher-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Flurry iPhone SDK viPhone 4/Flurry-iOS-4.2.3/Flurry\"",
-					"$(PROJECT_DIR)/TabbedApp",
-				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/Libraries/Flurry";
 				PRODUCT_NAME = BioSearcher;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
