@@ -13,13 +13,6 @@
 #define charactersPath @"characters"
 #define optionsPath @"options"
 
-@interface JSONConnection : Connection
-
-
--(void)loadData:(DataType)type forParentId:(int)parentid;
-
--(void)connect:(NSString *)sqlParameter forDatafield:(NSString*)field;
-
 typedef enum {
     DataTypeFamilies,
     DataTypeFamily,
@@ -27,5 +20,12 @@ typedef enum {
     DataTypeOptions,
     DataTypeProfile
 } DataType;
+
+@interface JSONConnection : Connection
+
+
+-(void)loadData:(DataType)type forParentId:(int)parentid;
+
+
 
 @end
