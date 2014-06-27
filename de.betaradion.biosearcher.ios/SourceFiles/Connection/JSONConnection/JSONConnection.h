@@ -9,9 +9,9 @@
 #import "Connection.h"
 
 #define webPath @"http://localhost:8080/rest_service/rest/"
-#define familiesPath @"families"
-#define charactersPath @"characters"
-#define optionsPath @"options"
+#define familiesPath @"families/"
+#define charactersPath @"characters/"
+#define optionsPath @"options/"
 
 typedef enum DataType{
     DataTypeFamilies,
@@ -25,8 +25,6 @@ typedef enum DataType{
 @interface JSONConnection : Connection
 
 
--(void)loadData:(DataType)type forParentId:(NSString *)parentid;
-
-
+-(void)loadData:(DataType)type forParentId:(NSNumber *)parentid;
 
 @end

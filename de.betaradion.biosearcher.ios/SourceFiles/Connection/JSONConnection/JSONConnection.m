@@ -13,7 +13,7 @@
 }
 
 
--(void)loadData:(DataType)type forParentId:(NSString *)parentID
+-(void)loadData:(DataType)type forParentId:(NSNumber *)parentID
 {
     loadedDataType = type;
     NSMutableString *path = [NSMutableString stringWithString:webPath];
@@ -24,18 +24,18 @@
             break;
         case DataTypeFamily:
             [path appendString:familiesPath];
-            [path appendString:parentID];
+            [path appendString:[NSString stringWithFormat:@"%i/",parentID.intValue]];
             break;
         case DataTypeCharacters:
             [path appendString:familiesPath];
-            [path appendString:parentID];
+            [path appendString:[NSString stringWithFormat:@"%i/",parentID.intValue]];
             [path appendString:charactersPath];
             break;
         case DataTypeOptions:
             [path appendString:familiesPath];
-            [path appendString:parentID];
+            [path appendString:[NSString stringWithFormat:@"%i/",parentID.intValue]];
             [path appendString:charactersPath];
-            [path appendString:parentID];
+            [path appendString:[NSString stringWithFormat:@"%i/",parentID.intValue]];
             [path appendString:optionsPath];
             break;
         case DataTypeProfile:
@@ -58,10 +58,12 @@
                  JSONObjectWithData:self.receivedData
                  options:0
                  error:&error];
+    NSLog([[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding]);
     
     if ([NSJSONSerialization isValidJSONObject:object])
     {
         NSLog(@"Completed!");
+        
         
         if([object isKindOfClass:[NSArray class]])
         {
@@ -72,14 +74,14 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"DidFinishLoadingFromNetworkNotification"
                                                                 object:self
                                                               userInfo:@{ @"loadedField" : [NSString stringWithFormat:@"%u",loadedDataType],
-                                                                          @"JSONArray" : results}];
+                                                                          @"data" : results}];
         } else  if ([object isKindOfClass:[NSDictionary class]]){
             NSDictionary *results = object;
             NSLog(@"%@", results);
             [[NSNotificationCenter defaultCenter] postNotificationName:@"DidFinishLoadingFromNetworkNotification"
                                                                 object:self
                                                               userInfo:@{ @"loadedField" : [NSString stringWithFormat:@"%u",loadedDataType],
-                                                                          @"JSONArray" : results}];
+                                                                          @"data" : results}];
         }
     } else {
         NSLog(@"Error no valid JSON-Object");

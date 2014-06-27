@@ -23,7 +23,7 @@
     [super viewDidLoad];
     self.selectedOptions = [[NSMutableDictionary alloc] init];
     self.characters = [[NSArray alloc] init];
-    self.options = [[NSDictionary alloc] init];
+    self.options = [[NSArray alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -32,7 +32,7 @@
     if(self.characters.count == 0){
         [self showHud:animated];
         JSONConnection* conn = [[JSONConnection alloc] init];
-        [conn loadData:@"DataTypeCharacters" forParentId:self.family[@"FID"]];
+        [conn loadData:DataTypeCharacters forParentId:self.family[@"id"]];
     }
     self.title = self.family[@"name"];
     
@@ -42,7 +42,7 @@
 {
     [self showHud:YES];
     JSONConnection *conn = [[JSONConnection alloc] init];
-    [conn loadData:@"DataTypeCharacters" forParentId:self.family[@"FID"]];
+    [conn loadData:DataTypeCharacters forParentId:self.family[@"FID"]];
     
     // weil durch das refreshen potenziell Einträge aus der
     // Liste der Charakteristika verschwinden bzw sich verschieben
@@ -58,18 +58,17 @@
 - (void) didFinishLoadingFromNet:(NSNotification*)notification
 {
     NSDictionary* info = notification.userInfo;
-    NSString* field = info[@"loadedField"] ;
-    
-    if ([field isEqualToString:@"characters"])
+    NSString *type = info[@"loadedField"];
+    if ([type isEqualToString:[NSString stringWithFormat:@"%d", DataTypeCharacters]])
     {
-        self.characters = info[@"characters"];
+        self.characters = info[@"data"];
         [self.tableView reloadData];
         [self hideHud:YES];
         [self.refreshControl endRefreshing];
     }
-    else if ([field isEqualToString:@"options"])
+    else if ([type isEqualToString:[NSString stringWithFormat:@"%d", DataTypeOptions]])
     {
-        self.options = info[@"options"];
+        self.options = info[@"data"];
         [self hideHud:YES];
         [self showPicker];
     }
@@ -80,10 +79,9 @@
     NSMutableArray* optionsArray = [[NSMutableArray alloc] init];
     [optionsArray addObject:NSLocalizedString(@"options.picker.no.selection", @"Key for PickerView: noSelection")];
     
-    for (int i=1; i<=self.options.count; i++)
+    for (int i=0; i<self.options.count; i++)
     {
-        NSString *string = [NSString stringWithFormat:@"%i", i];
-        NSString *optionName = self.options[string][@"name"];
+        NSString *optionName = self.options[i][@"name"];
         [optionsArray addObject:optionName];
     }
     
@@ -111,7 +109,7 @@
     if (selectedOption.integerValue == 0){
         [self.selectedOptions removeObjectForKey:self.selectedCharacter];
     } else {
-        self.selectedOptions[self.selectedCharacter] = self.options[selectedOption.stringValue];
+        self.selectedOptions[self.selectedCharacter] = self.options[selectedOption.intValue-1];
     }
     
     [self.tableView reloadData];
@@ -130,8 +128,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    
     return [self.characters count];
 }
 
@@ -170,7 +166,7 @@
     [self showHud:YES];
     
     JSONConnection* conn = [[JSONConnection alloc] init];
-    [conn loadData:@"DataTypeOptions" forParentId:self.selectedCharacter[@"CID"]];
+    [conn loadData:DataTypeOptions forParentId:self.selectedCharacter[@"id"]];
 
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
