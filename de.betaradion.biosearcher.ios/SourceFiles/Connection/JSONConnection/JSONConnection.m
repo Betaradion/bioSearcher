@@ -10,9 +10,38 @@
 
 @implementation JSONConnection
 
--(void)connect:(NSString *)jsonParameter forDatafield:(NSString*)field
+
+-(void)loadData:(DataType)type forParentID:(NSString *)parentID
 {
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", webPath, field]]];
+    NSMutableString *path = [NSMutableString stringWithString:webPath];
+    
+    switch (type) {
+        case DataTypeFamilies:
+            [path appendString:familiesPath];
+            break;
+        case DataTypeFamily:
+            [path appendString:familiesPath];
+            [path appendString:parentID];
+            break;
+        case DataTypeCharacters:
+            [path appendString:familiesPath];
+            [path appendString:parentID];
+            [path appendString:charactersPath];
+            break;
+        case DataTypeOptions:
+            [path appendString:familiesPath];
+            [path appendString:parentID];
+            [path appendString:charactersPath];
+            [path appendString:optionsPath];
+            break;
+        case DataTypeProfile:
+            break;
+            
+        default:
+            assert(@"No valid request");
+            break;
+    }
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:path]];
     
     NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     [conn start];
@@ -38,7 +67,7 @@
         if([object isKindOfClass:[NSArray class]])
         {
             NSDictionary *results = object;
-           
+            
             NSLog(@"%@", results);
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"DidFinishLoadingFromNetworkNotification"
@@ -51,7 +80,7 @@
     
     [self networkActivity:NO];
     
-   }
+}
 
 -(void)loadFamiliesFromServer:(NSString *)type
 {
