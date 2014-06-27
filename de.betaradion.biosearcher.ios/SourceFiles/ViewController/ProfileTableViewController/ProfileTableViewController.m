@@ -1,13 +1,12 @@
 //
 //  ProfileTableViewController.m
-//  TabbedApp
 //
 //  Created by Betaradion on 16.01.13.
 //  Copyright (c) 2013 Betaradion. All rights reserved.
 //
 
 #import "ProfileTableViewController.h"
-#import "pListConnection.h"
+#import "JSONConnection.h"
 #import "imageConnection.h"
 #import "PopoverView.h"
 #import "Flurry.h"
@@ -39,7 +38,7 @@
     if(self.profile.count == 0){
         [self showHud:animated];
         
-        pListConnection *conn = [[pListConnection alloc] init];
+        JSONConnection *conn = [[JSONConnection alloc] init];
         [conn loadFromServer:@"profile" parentId:self.species[@"SID"]];
         
     }
@@ -54,7 +53,7 @@
 - (void)refreshAction
 {
     [self showHud:YES];
-    pListConnection *conn = [[pListConnection alloc] init];
+    JSONConnection *conn = [[JSONConnection alloc] init];
     [conn loadFromServer:@"profile" parentId:self.species[@"SID"]];
     
 }
@@ -146,10 +145,7 @@
         [cell setSelectedBackgroundView:[self createSelectedBackgroundView:cell.frame]];
         cell.textLabel.font = cellFont;
         
-        NSString *row = [NSString stringWithFormat:@"%i",indexPath.row + 1];
-        //Reihe plus 1 setzten weil nullbasierend
-        
-        NSDictionary *currentProfileRow = self.profile[row];
+        NSDictionary *currentProfileRow = self.profile[indexPath.row];
         
         
         //Aus der aktuellen Reihe den String "vorname" auslesen und dem Tabellenlabes gleichsetzen.
@@ -174,15 +170,6 @@
 {
     if (indexPath.row != 0)
     {
-//        NSString* row = [NSString stringWithFormat:@"%i",indexPath.row];
-//        NSDictionary* currentProfileRow = self.profile[row];
-//        UIAlertView *profile = [[UIAlertView alloc] initWithTitle:currentProfileRow[@"name"]
-//                                                          message:currentProfileRow[@"value"]
-//                                                         delegate:nil
-//                                                cancelButtonTitle:@"OK"
-//                                                otherButtonTitles:nil];
-//        [profile show];
-        
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         
 //        CGRect frame = CGRectMake(0.0, 0.0, cell.frame.size.width, cell.frame.size.height);
