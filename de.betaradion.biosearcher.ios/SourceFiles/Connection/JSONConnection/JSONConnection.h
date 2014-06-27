@@ -13,13 +13,14 @@
 #define charactersPath @"characters"
 #define optionsPath @"options"
 
-typedef enum {
+typedef enum DataType{
     DataTypeFamilies,
     DataTypeFamily,
     DataTypeCharacters,
     DataTypeOptions,
     DataTypeProfile
 } DataType;
+
 
 @interface JSONConnection : Connection
 

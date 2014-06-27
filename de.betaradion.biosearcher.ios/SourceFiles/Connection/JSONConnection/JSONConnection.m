@@ -8,14 +8,17 @@
 
 #import "JSONConnection.h"
 
-@implementation JSONConnection
+@implementation JSONConnection{
+    DataType loadedDataType;
+}
 
 
 -(void)loadData:(DataType)type forParentId:(NSString *)parentID
 {
+    loadedDataType = type;
     NSMutableString *path = [NSMutableString stringWithString:webPath];
     
-    switch (type) {
+    switch (loadedDataType) {
         case DataTypeFamilies:
             [path appendString:familiesPath];
             break;
@@ -60,43 +63,29 @@
     {
         NSLog(@"Completed!");
         
-        //        [[NSNotificationCenter defaultCenter] postNotificationName:@"DidFailLoadingFromNetworkNotification"
-        //                                                            object:self
-        //                                                          userInfo:@{ @"loadedField" : self.field}];
-        
-        
         if([object isKindOfClass:[NSArray class]])
         {
-            NSDictionary *results = object;
+            NSArray *results = object;
             
             NSLog(@"%@", results);
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"DidFinishLoadingFromNetworkNotification"
                                                                 object:self
-                                                              userInfo:@{ @"loadedField" : @"families", @"JSONArray" : results}];
+                                                              userInfo:@{ @"loadedField" : [NSString stringWithFormat:@"%u",loadedDataType],
+                                                                          @"JSONArray" : results}];
+        } else  if ([object isKindOfClass:[NSDictionary class]]){
+            NSDictionary *results = object;
+            NSLog(@"%@", results);
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DidFinishLoadingFromNetworkNotification"
+                                                                object:self
+                                                              userInfo:@{ @"loadedField" : [NSString stringWithFormat:@"%u",loadedDataType],
+                                                                          @"JSONArray" : results}];
         }
     } else {
-        NSLog(@"Error");
+        NSLog(@"Error no valid JSON-Object");
     }
     
     [self networkActivity:NO];
     
 }
-
--(void)loadFamiliesFromServer:(NSString *)type
-{
-    
-}
-
--(void)loadFromServer:(NSString *)type parentId:(NSString*)parentId
-{
-    
-}
-
--(void)loadSpeciesFromServer:(NSString *)type options:(NSMutableDictionary*)options family:(NSDictionary*)family
-{
-    
-}
-
-
 @end

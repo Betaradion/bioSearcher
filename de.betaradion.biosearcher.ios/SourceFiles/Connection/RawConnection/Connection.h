@@ -11,7 +11,6 @@
 @interface Connection : NSObject <NSURLConnectionDataDelegate>
 
 @property (nonatomic,retain)NSMutableData *receivedData;
-@property (nonatomic, copy) NSString* field;
 
 
 -(void)networkActivity:(BOOL)activity;
