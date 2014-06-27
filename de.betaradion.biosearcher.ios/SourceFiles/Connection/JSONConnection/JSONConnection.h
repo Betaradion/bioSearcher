@@ -24,7 +24,7 @@ typedef enum {
 @interface JSONConnection : Connection
 
 
--(void)loadData:(DataType)type forParentId:(int)parentid;
+-(void)loadData:(DataType)type forParentId:(NSString *)parentid;
 
 
 
