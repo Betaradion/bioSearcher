@@ -32,6 +32,7 @@
             [path appendString:familiesPath];
             [path appendString:parentID];
             [path appendString:charactersPath];
+            [path appendString:parentID];
             [path appendString:optionsPath];
             break;
         case DataTypeProfile:
