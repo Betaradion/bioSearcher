@@ -11,7 +11,7 @@
 @implementation JSONConnection
 
 
--(void)loadData:(DataType)type forParentID:(NSString *)parentID
+-(void)loadData:(DataType)type forParentId:(NSString *)parentID
 {
     NSMutableString *path = [NSMutableString stringWithString:webPath];
     
