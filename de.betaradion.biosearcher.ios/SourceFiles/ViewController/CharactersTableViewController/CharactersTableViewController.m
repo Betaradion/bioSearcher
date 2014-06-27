@@ -9,7 +9,7 @@
 #import "CharactersTableViewController.h"
 #import "ResultTableViewController.h"
 #import "MBProgressHUD.h"
-#import "pListConnection.h"
+#import "JSONConnection.h"
 #import "ActionSheetStringPicker.h"
 #import "PopoverView.h"
 
@@ -22,7 +22,7 @@
 {
     [super viewDidLoad];
     self.selectedOptions = [[NSMutableDictionary alloc] init];
-    self.characters = [[NSDictionary alloc] init];
+    self.characters = [[NSArray alloc] init];
     self.options = [[NSDictionary alloc] init];
 }
 
@@ -31,8 +31,9 @@
     [super viewWillAppear:animated];
     if(self.characters.count == 0){
         [self showHud:animated];
-        pListConnection* conn = [[pListConnection alloc] init];
-        [conn loadFromServer:@"characters" parentId:self.family[@"FID"]];
+        JSONConnection* conn = [[JSONConnection alloc] init];
+        //[conn loadFromServer:@"characters" parentId:self.family[@"FID"]];
+        [conn connect:@"" forDatafield:@"characters"];
     }
     self.title = self.family[@"name"];
     
@@ -41,7 +42,7 @@
 - (void)refreshAction
 {
     [self showHud:YES];
-    pListConnection *conn = [[pListConnection alloc] init];
+    JSONConnection *conn = [[JSONConnection alloc] init];
     [conn loadFromServer:@"characters" parentId:self.family[@"FID"]];
     
     // weil durch das refreshen potenziell Einträge aus der
@@ -51,8 +52,7 @@
     // Gewählte Options löschen.
     self.selectedOptions = [NSMutableDictionary dictionary];
     
-    self.characters = @{};
-    
+    self.characters = [NSArray array];
 }
 
 
@@ -144,9 +144,7 @@
     
     [cell setSelectedBackgroundView:[self createSelectedBackgroundView:cell.frame]];
     
-    NSString *row = [NSString stringWithFormat:@"%i",indexPath.row + 1];
-    //Reihe plus 1 setzten weil nullbasierend
-    NSDictionary* currentCharacter = self.characters[row];
+    NSDictionary* currentCharacter = self.characters[indexPath.row];
     
     cell.textLabel.text = currentCharacter[@"name"];
     cell.detailTextLabel.text = self.selectedOptions[currentCharacter][@"name"];
@@ -168,12 +166,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Schritt 1: Aus der Tabelle das gewählte Charakteristikum ermitteln
-    NSString *characterRow = [NSString stringWithFormat:@"%i",indexPath.row + 1];
-    self.selectedCharacter = self.characters[characterRow];
+
+    self.selectedCharacter = self.characters[indexPath.row];
     [self showHud:YES];
     
-    pListConnection* conn = [[pListConnection alloc] init];
+    JSONConnection* conn = [[JSONConnection alloc] init];
     [conn loadFromServer:@"options" parentId:self.selectedCharacter[@"CID"]];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -191,9 +188,7 @@
 
 -(void)infoButtonTabbed:(UIButton *)button
 {
-    //    TODO: Implementieren des Ladens der Informationen über die Eigenschaften, sowie erstellen der Tabellen in der DB
-    NSString* tag = [NSString stringWithFormat:@"%i", button.tag + 1];
-    NSDictionary* currentCharacter = self.characters[tag];
+    NSDictionary* currentCharacter = self.characters[button.tag + 1];
     [PopoverView showPopoverAtPoint:button.center inView:button.superview withText:currentCharacter[@"description"] delegate:nil];
 }
 @end
