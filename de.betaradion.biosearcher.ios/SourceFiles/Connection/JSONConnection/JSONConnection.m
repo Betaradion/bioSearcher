@@ -23,7 +23,7 @@
 {
     NSString* httpRequest = [[NSString alloc] init];
     if ([type isEqual: @"families"]) {
-        httpRequest = [NSString stringWithFormat:@"%@ %@",  webPath ,"families/"];
+        httpRequest = [NSString stringWithFormat:@"%@ %@",  webPath , @"families/"];
         [self connect:httpRequest forDatafield:@"families"];
     }
 }
