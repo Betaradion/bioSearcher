@@ -15,7 +15,7 @@
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *find;
 //- (IBAction)prepareFind:(id)sender;
-@property (nonatomic, strong) NSDictionary* characters;
+@property (nonatomic, strong) NSArray* characters;
 @property (nonatomic, strong) NSDictionary* options;
 
 @property (nonatomic, strong) NSMutableDictionary* selectedOptions;
