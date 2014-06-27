@@ -12,6 +12,7 @@
 #define familiesPath @"families/"
 #define charactersPath @"characters/"
 #define optionsPath @"options/"
+#define search @"search/"
 
 typedef enum DataType{
     DataTypeFamilies,
@@ -26,5 +27,6 @@ typedef enum DataType{
 
 
 -(void)loadData:(DataType)type forParentId:(NSNumber *)parentid;
+-(void)searchForFamilyWithID:(NSNumber *)id andCharacters:(NSDictionary *)characters;
 
 @end

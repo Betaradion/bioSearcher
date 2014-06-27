@@ -45,10 +45,29 @@
             assert(@"No valid request");
             break;
     }
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:path]];
+
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [conn start];
+}
+
+-(void)searchForFamilyWithID:(NSNumber *)id andCharacters:(NSDictionary *)characters
+{
+    NSMutableString *path = [NSMutableString stringWithString:webPath];
+    [path appendString:search];
+    [path appendString:[NSString stringWithFormat:@"?family=%@", id.stringValue]];
+
+    for (NSString *key in characters) {
+        NSString *parameter = [NSString stringWithFormat:@"&%@=%@", key, characters[key]];
+        [path appendString:parameter];
+    }
+
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:path]];
     
     NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     [conn start];
+
 }
 
 -(void)connectionDidFinishLoading:(NSURLConnection*)connection
