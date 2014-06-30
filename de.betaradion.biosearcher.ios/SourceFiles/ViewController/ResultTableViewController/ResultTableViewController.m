@@ -44,7 +44,7 @@
     JSONConnection *conn = [[JSONConnection alloc] init];
     [conn searchForSpeciesWithFamilyID:self.family[@"id"] andCharacters:self.options];
     self.images = [NSMutableDictionary dictionary];
-    self.species = [NSDictionary dictionary];
+    self.species = @[];
 }
 
 
@@ -106,9 +106,7 @@
         cell.textLabel.text = NSLocalizedString(@"result.tableviewcontroller.cell.no.results", @"Error when displaying: No Species found.");
         return cell;
     } else {
-        NSString *row =[NSString stringWithFormat:@"%i",indexPath.row + 1];
-        //Reihe plus 1 setzten weil nullbasierend
-        NSDictionary* currentSpecies = self.species[row];
+        NSDictionary* currentSpecies = self.species[indexPath.row];
         
         cell.textLabel.text = currentSpecies[@"name"];
         
@@ -128,17 +126,16 @@
 
 - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *row = [NSString stringWithFormat:@"%i",indexPath.row + 1];
-    self.selectedSpecies = self.species[row];
+    self.selectedSpecies = self.species[indexPath.row];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"showSpeciesProfile"])
-    {
-        ProfileTableViewController* profileTVC = segue.destinationViewController;
+//    if ([segue.identifier isEqualToString:@"showSpeciesProfile"])
+//    {
+//        ProfileTableViewController* profileTVC = segue.destinationViewController;
 //        profileTVC.species = self.selectedSpecies;
-    }
+//    }
     
 }
 
