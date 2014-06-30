@@ -40,8 +40,6 @@
                                              selector:@selector(didFailLoadingFromNet:)
                                                  name:@"DidFailLoadingFromNetworkNotification"
                                                object:nil];
-    
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -81,7 +79,5 @@
     selectionColorView.backgroundColor = CUSTOM_CELL_SELECTED_BACKGROUND_COLOR;
     return selectionColorView;
 }
-
-
 
 @end

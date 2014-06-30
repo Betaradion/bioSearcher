@@ -131,11 +131,11 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-//    if ([segue.identifier isEqualToString:@"showSpeciesProfile"])
-//    {
-//        ProfileTableViewController* profileTVC = segue.destinationViewController;
-//        profileTVC.species = self.selectedSpecies;
-//    }
+    if ([segue.identifier isEqualToString:@"showSpeciesProfile"])
+    {
+        ProfileTableViewController* profileTVC = segue.destinationViewController;
+        profileTVC.species = self.selectedSpecies;
+    }
     
 }
 @end

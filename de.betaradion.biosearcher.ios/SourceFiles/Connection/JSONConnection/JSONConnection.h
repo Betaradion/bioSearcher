@@ -16,7 +16,6 @@
 
 @interface JSONConnection : Connection
 
-
 -(void)loadData:(DataType)type forParentId:(NSNumber *)parentid;
 -(void)searchForSpeciesWithFamilyID:(NSNumber *)id andCharacters:(NSDictionary *)characters;
 

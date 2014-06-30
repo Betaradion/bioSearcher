@@ -24,7 +24,7 @@ typedef enum DataType{
     DataTypeCharacters,
     DataTypeOptions,
     DataTypeProfile,
-    DataTypeSpecies
+    DataTypeSpecies,
     DataTypeImages,
     DataTypeImage
 } DataType;

@@ -8,17 +8,20 @@
 
 #import "JSONConnection.h"
 
-@implementation JSONConnection{
-    DataType loadedDataType;
-}
+@interface JSONConnection()
 
+@property  DataType loadedDataType;
+@end
+
+
+@implementation JSONConnection
 
 -(void)loadData:(DataType)type forParentId:(NSNumber *)parentID
 {
-    loadedDataType = type;
+    self.loadedDataType = type;
     NSMutableString *path = [NSMutableString stringWithString:webPath];
     
-    switch (loadedDataType) {
+    switch (self.loadedDataType) {
         case DataTypeFamilies:
             [path appendString:familiesPath];
             break;
@@ -47,27 +50,29 @@
     }
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:path]];
-
+    
     NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     [conn start];
 }
 
 -(void)searchForSpeciesWithFamilyID:(NSNumber *)id andCharacters:(NSDictionary *)characters
 {
+    self.loadedDataType = DataTypeSpecies;
+    
     NSMutableString *path = [NSMutableString stringWithString:webPath];
     [path appendString:search];
     [path appendString:[NSString stringWithFormat:@"?family=%@", id.stringValue]];
-
+    
     for (NSString *key in characters) {
         NSString *parameter = [NSString stringWithFormat:@"&%@=%@", key, characters[key]];
         [path appendString:parameter];
     }
-
+    
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:path]];
     
     NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     [conn start];
-
+    
 }
 
 -(void)connectionDidFinishLoading:(NSURLConnection*)connection
@@ -92,14 +97,14 @@
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"DidFinishLoadingFromNetworkNotification"
                                                                 object:self
-                                                              userInfo:@{ @"loadedField" : [NSString stringWithFormat:@"%u",loadedDataType],
+                                                              userInfo:@{ @"loadedField" : [NSString stringWithFormat:@"%u", self.loadedDataType],
                                                                           @"data" : results}];
         } else  if ([object isKindOfClass:[NSDictionary class]]){
             NSDictionary *results = object;
             NSLog(@"%@", results);
             [[NSNotificationCenter defaultCenter] postNotificationName:@"DidFinishLoadingFromNetworkNotification"
                                                                 object:self
-                                                              userInfo:@{ @"loadedField" : [NSString stringWithFormat:@"%u",loadedDataType],
+                                                              userInfo:@{ @"loadedField" : [NSString stringWithFormat:@"%u", self.loadedDataType],
                                                                           @"data" : results}];
         }
     } else {
@@ -109,8 +114,4 @@
     [self networkActivity:NO];
     
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/Betaradion/bioSearcher.git
 @end
