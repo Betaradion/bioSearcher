@@ -52,7 +52,7 @@
     [conn start];
 }
 
--(void)searchForFamilyWithID:(NSNumber *)id andCharacters:(NSDictionary *)characters
+-(void)searchForSpeciesWithFamilyID:(NSNumber *)id andCharacters:(NSDictionary *)characters
 {
     NSMutableString *path = [NSMutableString stringWithString:webPath];
     [path appendString:search];

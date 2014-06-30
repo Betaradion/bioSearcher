@@ -15,11 +15,12 @@
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *find;
 //- (IBAction)prepareFind:(id)sender;
-@property (nonatomic, strong) NSArray* characters;
-@property (nonatomic, strong) NSArray* options;
+@property (nonatomic, strong) NSArray* characters;//All possible characters to choose from
+@property (nonatomic, strong) NSArray* options;//All matching options to choose from
 
-@property (nonatomic, strong) NSMutableDictionary* selectedOptions;
-@property (nonatomic, strong) NSDictionary* selectedCharacter;
+@property (nonatomic, strong) NSMutableDictionary* selectedOptions;//All chosen options <CID,OID>
+@property (nonatomic, strong) NSDictionary* selectedCharacter;//Chosen Character <id,(...),
+                                                              //                  name,(...)>
 
 -(void)infoButtonTabbed:(UIButton *)button;
 
