@@ -41,7 +41,7 @@
 {
     [self showHud:YES];
     JSONConnection *conn = [[JSONConnection alloc] init];
-    [conn loadData:DataTypeFamilies forParentId:@""];
+    [conn loadData:DataTypeFamilies forParentId:0];
     self.families = [NSArray array];
 }
 

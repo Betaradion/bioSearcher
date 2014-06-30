@@ -11,8 +11,7 @@
 
 @interface ResultTableViewController : BSTableViewController <UISearchBarDelegate>
 
-@property (weak, nonatomic) IBOutlet UISearchBar *SearchBar;
-@property (nonatomic, strong) NSDictionary* species;
+@property (nonatomic, strong) NSArray* species; //[{"id":(...),"name":(...)}]
 @property (nonatomic, strong) NSMutableDictionary* options;
 @property (nonatomic, strong) NSDictionary* family;
 @property (nonatomic, strong) NSMutableDictionary* images;
