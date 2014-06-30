@@ -9,11 +9,12 @@
 #import "Connection.h"
 
 #define webPath @"http://localhost:8080/rest_service/rest/"
-#define familiesPath @"families"
-#define charactersPath @"characters"
-#define optionsPath @"options"
+#define familiesPath @"families/"
+#define charactersPath @"characters/"
+#define optionsPath @"options/"
+#define search @"search/"
 
-typedef enum {
+typedef enum DataType{
     DataTypeFamilies,
     DataTypeFamily,
     DataTypeCharacters,
@@ -21,11 +22,11 @@ typedef enum {
     DataTypeProfile
 } DataType;
 
+
 @interface JSONConnection : Connection
 
 
--(void)loadData:(DataType)type forParentId:(NSString *)parentid;
-
-
+-(void)loadData:(DataType)type forParentId:(NSNumber *)parentid;
+-(void)searchForFamilyWithID:(NSNumber *)id andCharacters:(NSDictionary *)characters;
 
 @end

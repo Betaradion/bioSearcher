@@ -33,7 +33,7 @@
         [self showHud:animated];
         
         JSONConnection *conn = [[JSONConnection alloc] init];
-        [conn loadData:DataTypeFamilies forParentId:@""];
+        [conn loadData:DataTypeFamilies forParentId:0];
     }
 }
 
@@ -50,10 +50,10 @@
 {
     NSDictionary* info = notification.userInfo;
 
-    NSString* field = info[@"loadedField"];
-    if ([field isEqualToString:@"families"])
+    NSString *type = info[@"loadedField"];
+    if ([type isEqualToString:[NSString stringWithFormat:@"%d", DataTypeFamilies]])
     {
-        self.families = info[@"JSONArray"];
+        self.families = info[@"data"];
         [self.refreshControl endRefreshing];
         [self hideHud:YES];
         [self.tableView reloadData];
@@ -94,7 +94,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-    self.selectedFamily = [self.families objectAtIndex:indexPath.row];
+    self.selectedFamily = self.families[indexPath.row];
 
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
