@@ -8,14 +8,66 @@
 
 #import "JSONConnection.h"
 
-@implementation JSONConnection
+@implementation JSONConnection{
+    DataType loadedDataType;
+}
 
--(void)connect:(NSString *)jsonParameter forDatafield:(NSString*)field
+
+-(void)loadData:(DataType)type forParentId:(NSNumber *)parentID
 {
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", webPath, field]]];
+    loadedDataType = type;
+    NSMutableString *path = [NSMutableString stringWithString:webPath];
+    
+    switch (loadedDataType) {
+        case DataTypeFamilies:
+            [path appendString:familiesPath];
+            break;
+        case DataTypeFamily:
+            [path appendString:familiesPath];
+            [path appendString:[NSString stringWithFormat:@"%i/",parentID.intValue]];
+            break;
+        case DataTypeCharacters:
+            [path appendString:familiesPath];
+            [path appendString:[NSString stringWithFormat:@"%i/",parentID.intValue]];
+            [path appendString:charactersPath];
+            break;
+        case DataTypeOptions:
+            [path appendString:familiesPath];
+            [path appendString:[NSString stringWithFormat:@"%i/",parentID.intValue]];
+            [path appendString:charactersPath];
+            [path appendString:[NSString stringWithFormat:@"%i/",parentID.intValue]];
+            [path appendString:optionsPath];
+            break;
+        case DataTypeProfile:
+            break;
+            
+        default:
+            assert(@"No valid request");
+            break;
+    }
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:path]];
+
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [conn start];
+}
+
+-(void)searchForSpeciesWithFamilyID:(NSNumber *)id andCharacters:(NSDictionary *)characters
+{
+    NSMutableString *path = [NSMutableString stringWithString:webPath];
+    [path appendString:search];
+    [path appendString:[NSString stringWithFormat:@"?family=%@", id.stringValue]];
+
+    for (NSString *key in characters) {
+        NSString *parameter = [NSString stringWithFormat:@"&%@=%@", key, characters[key]];
+        [path appendString:parameter];
+    }
+
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:path]];
     
     NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     [conn start];
+
 }
 
 -(void)connectionDidFinishLoading:(NSURLConnection*)connection
@@ -25,48 +77,40 @@
                  JSONObjectWithData:self.receivedData
                  options:0
                  error:&error];
+    NSLog([[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding]);
     
     if ([NSJSONSerialization isValidJSONObject:object])
     {
         NSLog(@"Completed!");
         
-        //        [[NSNotificationCenter defaultCenter] postNotificationName:@"DidFailLoadingFromNetworkNotification"
-        //                                                            object:self
-        //                                                          userInfo:@{ @"loadedField" : self.field}];
-        
         
         if([object isKindOfClass:[NSArray class]])
         {
-            NSDictionary *results = object;
-           
+            NSArray *results = object;
+            
             NSLog(@"%@", results);
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"DidFinishLoadingFromNetworkNotification"
                                                                 object:self
-                                                              userInfo:@{ @"loadedField" : @"families", @"JSONArray" : results}];
+                                                              userInfo:@{ @"loadedField" : [NSString stringWithFormat:@"%u",loadedDataType],
+                                                                          @"data" : results}];
+        } else  if ([object isKindOfClass:[NSDictionary class]]){
+            NSDictionary *results = object;
+            NSLog(@"%@", results);
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DidFinishLoadingFromNetworkNotification"
+                                                                object:self
+                                                              userInfo:@{ @"loadedField" : [NSString stringWithFormat:@"%u",loadedDataType],
+                                                                          @"data" : results}];
         }
     } else {
-        NSLog(@"Error");
+        NSLog(@"Error no valid JSON-Object");
     }
     
     [self networkActivity:NO];
     
-   }
-
--(void)loadFamiliesFromServer:(NSString *)type
-{
-    
 }
+<<<<<<< HEAD
 
--(void)loadFromServer:(NSString *)type parentId:(NSString*)parentId
-{
-    
-}
-
--(void)loadSpeciesFromServer:(NSString *)type options:(NSMutableDictionary*)options family:(NSDictionary*)family
-{
-    
-}
-
-
+=======
+>>>>>>> branch 'master' of https://github.com/Betaradion/bioSearcher.git
 @end

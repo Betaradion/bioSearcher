@@ -35,10 +35,10 @@
 {
     if(error != NULL)
     {
-        NSLog(@"%@ %d %@", [error domain], [error code], [error localizedDescription]);
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"DidFailLoadingFromNetworkNotification"
-                                                            object:self
-                                                          userInfo:@{ @"loadedField" : self.field, @"error" : error }];
+//        NSLog(@"%@ %d %@", [error domain], [error code], [error localizedDescription]);
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"DidFailLoadingFromNetworkNotification"
+//                                                            object:self
+//                                                          userInfo:@{ @"loadedField" : self.field, @"error" : error }];
         [self networkActivity:NO];
     }
 }

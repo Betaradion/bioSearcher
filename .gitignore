@@ -1,14 +1,5 @@
-
 *.xcuserstate
 
-de.betaradion.biosearcher.ios/bioSearcher.xcodeproj/project.xcworkspace/xcuserdata/**
+de.betaradion.biosearcher.ios/bioSearcher.xcodeproj/project.xcworkspace/**
+de.betaradion.biosearcher.ios/bioSearcher.xcodeproj/xcuserdata/**
 
-*.xcworkspacedata
-
-de.betaradion.biosearcher.ios/bioSearcher.xcodeproj/project.xcworkspace/project.xcworkspace
-
-de.betaradion.biosearcher.ios/bioSearcher.xcodeproj/project.xcworkspace/xcshareddata/bioSearcher.xccheckout
-
-de.betaradion.biosearcher.ios/bioSearcher.xcodeproj/xcuserdata/Yannick.xcuserdatad/xcschemes/bioSearcher.xcscheme
-
-de.betaradion.biosearcher.ios/bioSearcher.xcodeproj/xcuserdata/Yannick.xcuserdatad/xcschemes/xcschememanagement.plist

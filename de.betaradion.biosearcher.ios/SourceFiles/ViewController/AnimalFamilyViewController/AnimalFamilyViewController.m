@@ -22,7 +22,7 @@
 {
     [super viewDidLoad];
     self.selectedFamily = [[NSDictionary alloc] init];
-    self.families = [[NSDictionary alloc] init];
+    self.families = [[NSArray alloc] init];
 
 }
 
@@ -33,16 +33,15 @@
         [self showHud:animated];
         
         JSONConnection *conn = [[JSONConnection alloc] init];
-        [conn connect:@"leck mich" forDatafield:@"families"];
+        [conn loadData:DataTypeFamilies forParentId:0];
     }
-
 }
 
 - (void)refreshAction
 {
     [self showHud:YES];
     JSONConnection *conn = [[JSONConnection alloc] init];
-    [conn loadFamiliesFromServer:@"families"];
+    [conn loadData:DataTypeFamilies forParentId:0];
     self.families = [NSArray array];
 }
 
@@ -51,27 +50,23 @@
 {
     NSDictionary* info = notification.userInfo;
 
-    NSString* field = info[@"loadedField"];
-    if ([field isEqualToString:@"families"])
+    NSString *type = info[@"loadedField"];
+    if ([type isEqualToString:[NSString stringWithFormat:@"%d", DataTypeFamilies]])
     {
-        self.families = info[@"JSONArray"];
+        self.families = info[@"data"];
         [self.refreshControl endRefreshing];
         [self hideHud:YES];
         [self.tableView reloadData];
-        
-
     }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
     return [self.families count];
 }
 
@@ -83,11 +78,7 @@
     [cell setSelectedBackgroundView:[self createSelectedBackgroundView:cell.frame]];
     cell.textLabel.font = cellFont;
     
-    NSString *row = [NSString stringWithFormat:@"%i",indexPath.row + 1];
-    //Reihe plus 1 setzten weil nullbasierend
-    
     NSDictionary *currentFamily = self.families[indexPath.row];
-    
 
     //Aus der aktuellen Reihe den String "vorname" auslesen und dem Tabellenlabes gleichsetzen.
     cell.textLabel.text = currentFamily[@"name"];
@@ -103,11 +94,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-    NSString *row = [NSString stringWithFormat:@"%i",indexPath.row + 1];
-//    self.selectedFamily = [self.families objectForKey:row];
+    self.selectedFamily = self.families[indexPath.row];
+
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-   
     
     if ([segue.identifier isEqualToString:@"ShowCharacteristic"])
     {

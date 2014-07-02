@@ -47,7 +47,6 @@
 		F3C36A0C16D430CD009C77A4 /* StartLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = F3C36A0416D430CD009C77A4 /* StartLogo.png */; };
 		F3C36A0D16D430CD009C77A4 /* StartLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F3C36A0516D430CD009C77A4 /* StartLogo@2x.png */; };
 		F3DA520F17429419002B98A6 /* imageConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DA520E17429419002B98A6 /* imageConnection.m */; };
-		F3DA521217429494002B98A6 /* pListConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DA521117429494002B98A6 /* pListConnection.m */; };
 		F3F63240167C7A6200C28F8E /* ResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F6323F167C7A6200C28F8E /* ResultTableViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -118,8 +117,6 @@
 		F3C36A1016D43298009C77A4 /* bioSearcherLogoHintergrund114x114px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bioSearcherLogoHintergrund114x114px.png; sourceTree = "<group>"; };
 		F3DA520D17429419002B98A6 /* imageConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imageConnection.h; path = ImageConnection/imageConnection.h; sourceTree = "<group>"; };
 		F3DA520E17429419002B98A6 /* imageConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = imageConnection.m; path = ImageConnection/imageConnection.m; sourceTree = "<group>"; };
-		F3DA521017429494002B98A6 /* pListConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pListConnection.h; path = PListConnection/pListConnection.h; sourceTree = "<group>"; };
-		F3DA521117429494002B98A6 /* pListConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = pListConnection.m; path = PListConnection/pListConnection.m; sourceTree = "<group>"; };
 		F3F6323E167C7A6200C28F8E /* ResultTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultTableViewController.h; sourceTree = "<group>"; };
 		F3F6323F167C7A6200C28F8E /* ResultTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -214,8 +211,6 @@
 				5B07EE2B195C1CCF004271B8 /* JSONConnection.m */,
 				F31243AA165EC3610064D03D /* Connection.h */,
 				F31243AB165EC3610064D03D /* Connection.m */,
-				F3DA521017429494002B98A6 /* pListConnection.h */,
-				F3DA521117429494002B98A6 /* pListConnection.m */,
 				F3DA520D17429419002B98A6 /* imageConnection.h */,
 				F3DA520E17429419002B98A6 /* imageConnection.m */,
 			);
@@ -526,7 +521,6 @@
 				5BE7EFC6173AA103001E4F3F /* AbstractActionSheetPicker.m in Sources */,
 				5BE7EFCA173AA103001E4F3F /* ActionSheetStringPicker.m in Sources */,
 				F3DA520F17429419002B98A6 /* imageConnection.m in Sources */,
-				F3DA521217429494002B98A6 /* pListConnection.m in Sources */,
 				5BFD432E1743990C001692D6 /* PopoverView.m in Sources */,
 				5B07EE2C195C1CCF004271B8 /* JSONConnection.m in Sources */,
 				F362894C17C0C62600261158 /* WebViewController.m in Sources */,

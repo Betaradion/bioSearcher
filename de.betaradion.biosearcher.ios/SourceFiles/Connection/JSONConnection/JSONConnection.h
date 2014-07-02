@@ -9,12 +9,15 @@
 #import "Connection.h"
 
 #define webPath @"http://localhost:8080/rest_service/rest/"
+#define familiesPath @"families/"
+#define charactersPath @"characters/"
+#define optionsPath @"options/"
+#define search @"search/"
 
 @interface JSONConnection : Connection
 
--(void)loadFamiliesFromServer:(NSString *)type;
--(void)loadFromServer:(NSString *)type parentId:(NSString*)parentId;
--(void)loadSpeciesFromServer:(NSString *)type options:(NSMutableDictionary*)options family:(NSDictionary*)family;
--(void)connect:(NSString *)sqlParameter forDatafield:(NSString*)field;
+
+-(void)loadData:(DataType)type forParentId:(NSNumber *)parentid;
+-(void)searchForSpeciesWithFamilyID:(NSNumber *)id andCharacters:(NSDictionary *)characters;
 
 @end
