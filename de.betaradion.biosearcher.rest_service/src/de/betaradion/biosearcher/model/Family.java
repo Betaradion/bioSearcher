@@ -14,6 +14,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * The persistent class for the Families database table.
  * 
@@ -25,9 +27,13 @@ import javax.persistence.Table;
 		@NamedQuery(name = "Family.findByID", query = "SELECT f FROM Family f where f.fid = :id"), })
 public class Family implements Serializable {
 	private static final long serialVersionUID = 1L;
+	@Expose
 	private int fid;
+	@Expose
 	private String description;
+	@Expose
 	private String img;
+	@Expose
 	private String name;
 	private List<Character> characters;
 

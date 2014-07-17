@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import de.betaradion.biosearcher.model.Family;
 
@@ -31,7 +32,8 @@ public class BSController {
 				"Family.findAll", Family.class);
 		List<Family> families = familiesQuery.getResultList();
 		em.close();
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation()
+				.create();
 		String json = gson.toJson(families);
 		return json;
 	}
@@ -59,10 +61,11 @@ public class BSController {
 		TypedQuery<Family> familiesQuery = em.createNamedQuery(
 				"Family.findByID", Family.class);
 		familiesQuery.setParameter("id", fid);
-		List<Family> families = familiesQuery.getResultList();
+		Family family = familiesQuery.getSingleResult();
 		em.close();
-		Gson gson = new Gson();
-		String json = gson.toJson(families);
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation()
+				.create();
+		String json = gson.toJson(family);
 		return json;
 	}
 
@@ -70,16 +73,37 @@ public class BSController {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public String showCharactersofFamily(@PathParam("fid") int fid) {
-
-		return null;
+		EntityManager em = factory.createEntityManager();
+		em.getTransaction().begin();
+		TypedQuery<Character> charactersQuery = em.createNamedQuery(
+				"Character.findByFID", Character.class);
+		charactersQuery.setParameter("id", fid);
+		List<Character> characters = charactersQuery.getResultList();
+		em.close();
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation()
+				.create();
+		String json = gson.toJson(characters);
+		return json;
 	}
 
 	@Path("/{fid}/characters/{cid}")
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public String showCharacter(@PathParam("cid") int cid) {
+		EntityManager em = factory.createEntityManager();
+		em.getTransaction().begin();
+		TypedQuery<de.betaradion.biosearcher.model.Character> charactersQuery = em
+				.createNamedQuery("Character.findByCID",
+						de.betaradion.biosearcher.model.Character.class);
+		charactersQuery.setParameter("id", cid);
+		de.betaradion.biosearcher.model.Character character = charactersQuery
+				.getSingleResult();
+		em.close();
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation()
+				.create();
+		String json = gson.toJson(character);
+		return json;
 
-		return null;
 	}
 
 	@Path("/{fid}/characters/{cid}/options")
