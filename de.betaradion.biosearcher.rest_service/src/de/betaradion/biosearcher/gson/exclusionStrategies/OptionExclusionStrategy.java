@@ -12,8 +12,8 @@ public class OptionExclusionStrategy implements ExclusionStrategy {
 
 	@Override
 	public boolean shouldSkipField(FieldAttributes att) {
-		if (att.getName().equals("Character")
-				|| att.getName().equals("MatchTable")) {
+		if (att.getName().equals("character")
+				|| att.getName().equals("matchTables")) {
 			return true;
 		}
 		return false;

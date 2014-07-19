@@ -12,10 +12,8 @@ public class FamilyExclusionStrategy implements ExclusionStrategy {
 
 	@Override
 	public boolean shouldSkipField(FieldAttributes att) {
-		if (att.getName().equals("Family")
-				|| att.getName().equals("MatchTable")
-				|| att.getName().equals("Character")
-				|| att.getName().equals("MatchTable")) {
+		if (att.getName().equals("family") || att.getName().equals("character")
+				|| att.getName().equals("matchTables")) {
 			return true;
 		}
 		return false;

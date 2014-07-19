@@ -86,12 +86,10 @@ public class BSController {
 	public String showCharacter(@PathParam("cid") int cid) {
 		EntityManager em = factory.createEntityManager();
 		em.getTransaction().begin();
-		TypedQuery<de.betaradion.biosearcher.model.Character> characterQuery = em
-				.createNamedQuery("Character.findByCID",
-						de.betaradion.biosearcher.model.Character.class);
+		TypedQuery<Character> characterQuery = em.createNamedQuery(
+				"Character.findByCID", Character.class);
 		characterQuery.setParameter("id", cid);
-		de.betaradion.biosearcher.model.Character character = characterQuery
-				.getSingleResult();
+		Character character = characterQuery.getSingleResult();
 		em.close();
 		Gson gson = new GsonBuilder().addSerializationExclusionStrategy(
 				new CharacterExclusionStrategy()).create();
