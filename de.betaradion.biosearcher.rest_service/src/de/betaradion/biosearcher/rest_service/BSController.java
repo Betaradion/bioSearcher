@@ -15,7 +15,15 @@ import javax.ws.rs.core.MediaType;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import de.betaradion.biosearcher.gson.exclusionStrategies.CharacterExclusionStrategy;
+import de.betaradion.biosearcher.gson.exclusionStrategies.CharacterListExclusionStrategy;
+import de.betaradion.biosearcher.gson.exclusionStrategies.FamilyExclusionStrategy;
+import de.betaradion.biosearcher.gson.exclusionStrategies.FamilyListExclusionStrategy;
+import de.betaradion.biosearcher.gson.exclusionStrategies.OptionExclusionStrategy;
+import de.betaradion.biosearcher.gson.exclusionStrategies.OptionListExclusionStrategy;
+import de.betaradion.biosearcher.model.Character;
 import de.betaradion.biosearcher.model.Family;
+import de.betaradion.biosearcher.model.Option;
 
 @Path("/families")
 public class BSController {
@@ -25,31 +33,17 @@ public class BSController {
 
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
-	public String sayHello() {
+	public String showFamilies() {
 		EntityManager em = factory.createEntityManager();
 		em.getTransaction().begin();
 		TypedQuery<Family> familiesQuery = em.createNamedQuery(
 				"Family.findAll", Family.class);
 		List<Family> families = familiesQuery.getResultList();
 		em.close();
-		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation()
-				.create();
+		Gson gson = new GsonBuilder().addSerializationExclusionStrategy(
+				new FamilyListExclusionStrategy()).create();
 		String json = gson.toJson(families);
 		return json;
-	}
-
-	@Path("/create")
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	public String createFunction() {
-
-		EntityManager em = factory.createEntityManager();
-		em.getTransaction().begin();
-		Family fam = new Family();
-		em.getTransaction().commit();
-		em.close();
-
-		return null;
 	}
 
 	@Path("/{fid}")
@@ -63,8 +57,8 @@ public class BSController {
 		familiesQuery.setParameter("id", fid);
 		Family family = familiesQuery.getSingleResult();
 		em.close();
-		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation()
-				.create();
+		Gson gson = new GsonBuilder().addSerializationExclusionStrategy(
+				new FamilyExclusionStrategy()).create();
 		String json = gson.toJson(family);
 		return json;
 	}
@@ -80,8 +74,8 @@ public class BSController {
 		charactersQuery.setParameter("id", fid);
 		List<Character> characters = charactersQuery.getResultList();
 		em.close();
-		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation()
-				.create();
+		Gson gson = new GsonBuilder().addSerializationExclusionStrategy(
+				new CharacterListExclusionStrategy()).create();
 		String json = gson.toJson(characters);
 		return json;
 	}
@@ -92,34 +86,65 @@ public class BSController {
 	public String showCharacter(@PathParam("cid") int cid) {
 		EntityManager em = factory.createEntityManager();
 		em.getTransaction().begin();
-		TypedQuery<de.betaradion.biosearcher.model.Character> charactersQuery = em
+		TypedQuery<de.betaradion.biosearcher.model.Character> characterQuery = em
 				.createNamedQuery("Character.findByCID",
 						de.betaradion.biosearcher.model.Character.class);
-		charactersQuery.setParameter("id", cid);
-		de.betaradion.biosearcher.model.Character character = charactersQuery
+		characterQuery.setParameter("id", cid);
+		de.betaradion.biosearcher.model.Character character = characterQuery
 				.getSingleResult();
 		em.close();
-		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation()
-				.create();
+		Gson gson = new GsonBuilder().addSerializationExclusionStrategy(
+				new CharacterExclusionStrategy()).create();
 		String json = gson.toJson(character);
 		return json;
-
 	}
 
 	@Path("/{fid}/characters/{cid}/options")
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public String showOptions(@PathParam("cid") int cid) {
-
-		return null;
+		EntityManager em = factory.createEntityManager();
+		em.getTransaction().begin();
+		TypedQuery<Option> optionsQuery = em.createNamedQuery(
+				"Option.findByCID", Option.class);
+		optionsQuery.setParameter("id", cid);
+		List<Option> options = optionsQuery.getResultList();
+		em.close();
+		Gson gson = new GsonBuilder().addSerializationExclusionStrategy(
+				new OptionListExclusionStrategy()).create();
+		String json = gson.toJson(options);
+		return json;
 	}
 
 	@Path("/{fid}/characters/{cid}/options/{oid}")
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public String showOptionForId(@PathParam("oid") int oid) {
-
-		return null;
+		EntityManager em = factory.createEntityManager();
+		em.getTransaction().begin();
+		TypedQuery<Option> optionQuery = em.createNamedQuery(
+				"Option.findByOID", Option.class);
+		optionQuery.setParameter("id", oid);
+		Option option = optionQuery.getSingleResult();
+		em.close();
+		Gson gson = new GsonBuilder().addSerializationExclusionStrategy(
+				new OptionExclusionStrategy()).create();
+		String json = gson.toJson(option);
+		return json;
 	}
+
+	/*
+	 * @Path("/create")
+	 * 
+	 * @GET
+	 * 
+	 * @Produces(MediaType.TEXT_PLAIN) public String createFunction() {
+	 * 
+	 * EntityManager em = factory.createEntityManager();
+	 * em.getTransaction().begin(); Family fam = new Family();
+	 * em.getTransaction().commit(); em.close();
+	 * 
+	 * return null; }
+	 */
 
 }
