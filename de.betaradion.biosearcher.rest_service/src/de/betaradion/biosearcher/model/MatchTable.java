@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -15,13 +15,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "MatchTable")
-@NamedQuery(name = "MatchTable.findAll", query = "SELECT m FROM MatchTable m")
 public class MatchTable implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private MatchTablePK id;
 	private Character character;
 	private Option option;
-	private Species species;
+	private Species specy;
 
 	public MatchTable() {
 	}
@@ -36,7 +35,7 @@ public class MatchTable implements Serializable {
 	}
 
 	// bi-directional many-to-one association to Character
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CID", nullable = false)
 	public Character getCharacter() {
 		return this.character;
@@ -46,8 +45,8 @@ public class MatchTable implements Serializable {
 		this.character = character;
 	}
 
-	// bi-directional many-to-one association to Option
-	@ManyToOne
+	// uni-directional many-to-one association to Option
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "OID", nullable = false)
 	public Option getOption() {
 		return this.option;
@@ -58,14 +57,14 @@ public class MatchTable implements Serializable {
 	}
 
 	// bi-directional many-to-one association to Species
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "SID", nullable = false)
 	public Species getSpecy() {
-		return this.species;
+		return this.specy;
 	}
 
-	public void setSpecy(Species species) {
-		this.species = species;
+	public void setSpecy(Species specy) {
+		this.specy = specy;
 	}
 
 }

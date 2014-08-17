@@ -1,7 +1,9 @@
 package de.betaradion.biosearcher.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 /**
  * The primary key class for the MatchTable database table.
@@ -9,7 +11,7 @@ import javax.persistence.*;
  */
 @Embeddable
 public class MatchTablePK implements Serializable {
-	//default serial version id, required for serializable classes.
+	// default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 	private int sid;
 	private int cid;
@@ -18,26 +20,29 @@ public class MatchTablePK implements Serializable {
 	public MatchTablePK() {
 	}
 
-	@Column(insertable=false, updatable=false, unique=true, nullable=false)
+	@Column(insertable = false, updatable = false, unique = true, nullable = false)
 	public int getSid() {
 		return this.sid;
 	}
+
 	public void setSid(int sid) {
 		this.sid = sid;
 	}
 
-	@Column(insertable=false, updatable=false, unique=true, nullable=false)
+	@Column(insertable = false, updatable = false, unique = true, nullable = false)
 	public int getCid() {
 		return this.cid;
 	}
+
 	public void setCid(int cid) {
 		this.cid = cid;
 	}
 
-	@Column(insertable=false, updatable=false, unique=true, nullable=false)
+	@Column(insertable = false, updatable = false, unique = true, nullable = false)
 	public int getOid() {
 		return this.oid;
 	}
+
 	public void setOid(int oid) {
 		this.oid = oid;
 	}
@@ -49,11 +54,9 @@ public class MatchTablePK implements Serializable {
 		if (!(other instanceof MatchTablePK)) {
 			return false;
 		}
-		MatchTablePK castOther = (MatchTablePK)other;
-		return 
-			(this.sid == castOther.sid)
-			&& (this.cid == castOther.cid)
-			&& (this.oid == castOther.oid);
+		MatchTablePK castOther = (MatchTablePK) other;
+		return (this.sid == castOther.sid) && (this.cid == castOther.cid)
+				&& (this.oid == castOther.oid);
 	}
 
 	public int hashCode() {
@@ -62,7 +65,7 @@ public class MatchTablePK implements Serializable {
 		hash = hash * prime + this.sid;
 		hash = hash * prime + this.cid;
 		hash = hash * prime + this.oid;
-		
+
 		return hash;
 	}
 }

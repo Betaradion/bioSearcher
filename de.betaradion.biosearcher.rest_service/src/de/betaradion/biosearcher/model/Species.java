@@ -1,32 +1,53 @@
 package de.betaradion.biosearcher.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.codehaus.jackson.map.annotate.JsonView;
+
+import de.betaradion.biosearcher.model.jackson.Views;
 
 /**
  * The persistent class for the Species database table.
  * 
  */
 @Entity
-@Table(name="Species")
-@NamedQuery(name="Species.findAll", query="SELECT s FROM Species s")
+@Table(name = "Species")
+@NamedQuery(name = "Species.findBySID", query = "SELECT s FROM Species s where s.sid = :id")
 public class Species implements Serializable {
+	@JsonView(Views.Transient.class)
 	private static final long serialVersionUID = 1L;
+	@JsonView(Views.SpeciesView.class)
 	private int sid;
+	@JsonView(Views.SpeciesView.class)
 	private String img;
+	@JsonView(Views.SpeciesView.class)
 	private String name;
-	private List<MatchTable> matchTables;
-	private List<Profile> profiles;
+	@JsonView(Views.Transient.class)
+	private List<MatchTable> matches;
+	@JsonView(Views.Transient.class)
+	private List<Profile> profile;
+	@JsonView(Views.Transient.class)
+	private Family family;
 
 	public Species() {
 	}
 
-
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique = true, nullable = false)
 	public int getSid() {
 		return this.sid;
 	}
@@ -35,8 +56,7 @@ public class Species implements Serializable {
 		this.sid = sid;
 	}
 
-
-	@Column(length=45)
+	@Column(length = 45)
 	public String getImg() {
 		return this.img;
 	}
@@ -45,8 +65,7 @@ public class Species implements Serializable {
 		this.img = img;
 	}
 
-
-	@Column(nullable=false, length=45)
+	@Column(nullable = false, length = 45)
 	public String getName() {
 		return this.name;
 	}
@@ -55,54 +74,63 @@ public class Species implements Serializable {
 		this.name = name;
 	}
 
-
-	//bi-directional many-to-one association to MatchTable
-	@OneToMany(mappedBy="specy")
-	public List<MatchTable> getMatchTables() {
-		return this.matchTables;
+	// bi-directional many-to-one association to MatchTable
+	@OneToMany(mappedBy = "specy")
+	public List<MatchTable> getMatches() {
+		return this.matches;
 	}
 
-	public void setMatchTables(List<MatchTable> matchTables) {
-		this.matchTables = matchTables;
+	public void setMatches(List<MatchTable> matches) {
+		this.matches = matches;
 	}
 
-	public MatchTable addMatchTable(MatchTable matchTable) {
-		getMatchTables().add(matchTable);
-		matchTable.setSpecy(this);
+	public MatchTable addMatch(MatchTable match) {
+		getMatches().add(match);
+		match.setSpecy(this);
 
-		return matchTable;
+		return match;
 	}
 
-	public MatchTable removeMatchTable(MatchTable matchTable) {
-		getMatchTables().remove(matchTable);
-		matchTable.setSpecy(null);
+	public MatchTable removeMatch(MatchTable match) {
+		getMatches().remove(match);
+		match.setSpecy(null);
 
-		return matchTable;
+		return match;
 	}
 
-
-	//bi-directional many-to-one association to Profile
-	@OneToMany(mappedBy="specy")
-	public List<Profile> getProfiles() {
-		return this.profiles;
+	// bi-directional many-to-one association to Profile
+	@OneToMany(mappedBy = "species")
+	public List<Profile> getProfile() {
+		return this.profile;
 	}
 
-	public void setProfiles(List<Profile> profiles) {
-		this.profiles = profiles;
+	public void setProfile(List<Profile> profile) {
+		this.profile = profile;
 	}
 
 	public Profile addProfile(Profile profile) {
-		getProfiles().add(profile);
-		profile.setSpecy(this);
+		getProfile().add(profile);
+		profile.setSpecies(this);
 
 		return profile;
 	}
 
 	public Profile removeProfile(Profile profile) {
-		getProfiles().remove(profile);
-		profile.setSpecy(null);
+		getProfile().remove(profile);
+		profile.setSpecies(null);
 
 		return profile;
+	}
+
+	// bi-directional many-to-one association to Family
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "FID", nullable = false)
+	public Family getFamily() {
+		return this.family;
+	}
+
+	public void setFamily(Family family) {
+		this.family = family;
 	}
 
 }

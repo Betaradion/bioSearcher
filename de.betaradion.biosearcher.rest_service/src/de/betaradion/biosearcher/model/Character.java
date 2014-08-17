@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,7 +17,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.google.gson.annotations.Expose;
+import org.codehaus.jackson.map.annotate.JsonView;
+
+import de.betaradion.biosearcher.model.jackson.Views;
 
 /**
  * The persistent class for the Characters database table.
@@ -28,17 +31,21 @@ import com.google.gson.annotations.Expose;
 		@NamedQuery(name = "Character.findByFID", query = "SELECT c FROM Character c where c.family.fid = :id"),
 		@NamedQuery(name = "Character.findByCID", query = "SELECT c FROM Character c where c.cid = :id"), })
 public class Character implements Serializable {
+	@JsonView(Views.Transient.class)
 	private static final long serialVersionUID = 1L;
-	@Expose
+	@JsonView(Views.CharacterListView.class)
 	private int cid;
-	@Expose
+	@JsonView(Views.CharacterListView.class)
 	private String description;
-	@Expose
+	@JsonView(Views.CharacterListView.class)
 	private String img;
-	@Expose
+	@JsonView(Views.CharacterListView.class)
 	private String name;
+	@JsonView(Views.Transient.class)
 	private Family family;
-	private List<MatchTable> matchTables;
+	@JsonView(Views.Transient.class)
+	private List<MatchTable> matches;
+	@JsonView(Views.CharacterView.class)
 	private List<Option> options;
 
 	public Character() {
@@ -83,7 +90,7 @@ public class Character implements Serializable {
 	}
 
 	// bi-directional many-to-one association to Family
-	@ManyToOne(cascade = { CascadeType.ALL })
+	@ManyToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "FID", nullable = false)
 	public Family getFamily() {
 		return this.family;
@@ -95,26 +102,26 @@ public class Character implements Serializable {
 
 	// bi-directional many-to-one association to MatchTable
 	@OneToMany(mappedBy = "character")
-	public List<MatchTable> getMatchTables() {
-		return this.matchTables;
+	public List<MatchTable> getMatches() {
+		return this.matches;
 	}
 
-	public void setMatchTables(List<MatchTable> matchTables) {
-		this.matchTables = matchTables;
+	public void setMatches(List<MatchTable> matches) {
+		this.matches = matches;
 	}
 
-	public MatchTable addMatchTable(MatchTable matchTable) {
-		getMatchTables().add(matchTable);
-		matchTable.setCharacter(this);
+	public MatchTable addMatch(MatchTable match) {
+		getMatches().add(match);
+		match.setCharacter(this);
 
-		return matchTable;
+		return match;
 	}
 
-	public MatchTable removeMatchTable(MatchTable matchTable) {
-		getMatchTables().remove(matchTable);
-		matchTable.setCharacter(null);
+	public MatchTable removeMatch(MatchTable match) {
+		getMatches().remove(match);
+		match.setCharacter(null);
 
-		return matchTable;
+		return match;
 	}
 
 	// bi-directional many-to-one association to Option

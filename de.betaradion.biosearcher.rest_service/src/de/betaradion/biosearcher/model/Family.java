@@ -14,7 +14,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.google.gson.annotations.Expose;
+import org.codehaus.jackson.map.annotate.JsonView;
+
+import de.betaradion.biosearcher.model.jackson.Views;
 
 /**
  * The persistent class for the Families database table.
@@ -26,16 +28,20 @@ import com.google.gson.annotations.Expose;
 		@NamedQuery(name = "Family.findAll", query = "SELECT f FROM Family f"),
 		@NamedQuery(name = "Family.findByID", query = "SELECT f FROM Family f where f.fid = :id"), })
 public class Family implements Serializable {
+	@JsonView(Views.Transient.class)
 	private static final long serialVersionUID = 1L;
-	@Expose
+	@JsonView(Views.FamilyListView.class)
 	private int fid;
-	@Expose
+	@JsonView(Views.FamilyListView.class)
 	private String description;
-	@Expose
+	@JsonView(Views.FamilyListView.class)
 	private String img;
-	@Expose
+	@JsonView(Views.FamilyListView.class)
 	private String name;
+	@JsonView(Views.FamilyView.class)
 	private List<Character> characters;
+	@JsonView(Views.FamilyView.class)
+	private List<Species> species;
 
 	public Family() {
 	}
@@ -100,6 +106,30 @@ public class Family implements Serializable {
 		character.setFamily(null);
 
 		return character;
+	}
+
+	// bi-directional many-to-one association to Species
+	@OneToMany(mappedBy = "family")
+	public List<Species> getSpecies() {
+		return this.species;
+	}
+
+	public void setSpecies(List<Species> species) {
+		this.species = species;
+	}
+
+	public Species addSpecy(Species specy) {
+		getSpecies().add(specy);
+		specy.setFamily(this);
+
+		return specy;
+	}
+
+	public Species removeSpecy(Species specy) {
+		getSpecies().remove(specy);
+		specy.setFamily(null);
+
+		return specy;
 	}
 
 }
