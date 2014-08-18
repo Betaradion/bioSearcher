@@ -44,6 +44,10 @@ public class Option implements Serializable {
 	public Option() {
 	}
 
+	public Option(int oid) {
+		this.oid = oid;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false)

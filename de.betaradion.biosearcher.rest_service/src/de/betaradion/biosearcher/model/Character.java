@@ -51,6 +51,10 @@ public class Character implements Serializable {
 	public Character() {
 	}
 
+	public Character(int cid) {
+		this.cid = cid;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false)

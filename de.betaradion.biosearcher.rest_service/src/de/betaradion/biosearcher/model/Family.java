@@ -46,6 +46,10 @@ public class Family implements Serializable {
 	public Family() {
 	}
 
+	public Family(int fid) {
+		this.fid = fid;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false)
