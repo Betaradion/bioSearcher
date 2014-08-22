@@ -23,8 +23,8 @@ typedef enum DataType{
     DataTypeFamily,
     DataTypeCharacters,
     DataTypeOptions,
-    DataTypeProfile,
     DataTypeSpecies,
+    DataTypeProfile,
     DataTypeImages,
     DataTypeImage
 } DataType;

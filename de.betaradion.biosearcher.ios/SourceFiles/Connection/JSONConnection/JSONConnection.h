@@ -12,7 +12,8 @@
 #define familiesPath @"families/"
 #define charactersPath @"characters/"
 #define optionsPath @"options/"
-#define search @"search/"
+#define searchPath @"search/"
+#define profilePath @"profile/"
 
 @interface JSONConnection : Connection
 

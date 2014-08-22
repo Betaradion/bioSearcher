@@ -35,11 +35,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if(self.profile.count == 0){
+    if (self.profile.count == 0){
         [self showHud:animated];
         
         JSONConnection *conn = [[JSONConnection alloc] init];
-        [conn loadData:DataTypeProfile forParentId:self.species[@"SID"]];
+        [conn loadData:DataTypeProfile forParentId:self.species[@"id"]];
         
         
     }
@@ -65,19 +65,19 @@
     NSDictionary* info = notification.userInfo;
     
     NSString* field = info[@"loadedField"];
-    if ([field isEqualToString:@"profile"])
+    if ([field isEqualToString:[NSString stringWithFormat:@"%u", DataTypeProfile]])
     {
-        [[[imageConnection alloc] init] networkActivity:YES];
-        self.profile = info[@"profile"];
+//        [[[imageConnection alloc] init] networkActivity:YES];
+        self.profile = info[@"data"][@"profile"];
         [self.refreshControl endRefreshing];
         [self hideHud:YES];
         [self.tableView reloadData];
     }
     
-    if([field isEqualToString:@"image"]){
+    if([field isEqualToString:[NSString stringWithFormat:@"%u", DataTypeImage]]){
         self.profileImage = info[@"image"];
         NSMutableArray* rowArray = [[NSMutableArray alloc]init];
-        [rowArray addObject: [NSIndexPath indexPathForRow:0 inSection:0] ];
+        [rowArray addObject: [NSIndexPath indexPathForRow:0 inSection:0]];//Wieso immer path 0/0???
         [self.tableView  reloadRowsAtIndexPaths:rowArray withRowAnimation:YES];
     }
 }
@@ -90,71 +90,71 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.profile count] + 2;
+    return [self.profile count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
-    if (indexPath.row == 0) {
-        NSString *CellIdentifier = @"PictureCell";
-        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-        
-        UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
-
-        if(self.profileImage == nil){
-            UIActivityIndicatorView* loadingProfileImage = [[UIActivityIndicatorView alloc] init];
-            loadingProfileImage.color = DEFAULT_TINT_COLOR;
-            CGRect frame = loadingProfileImage.frame;
-            frame.origin.y = 73.0f;
-            
-            frame.origin.x = [UIScreen mainScreen].bounds.size.width / 2;
-            [loadingProfileImage startAnimating];
-            loadingProfileImage.frame = frame;
-            [imageView addSubview:loadingProfileImage];
-            cell.userInteractionEnabled = NO; 
-        } else {
-            cell.userInteractionEnabled = YES;   
-            imageView.image = self.profileImage;
-            imageView.userInteractionEnabled = YES;
-            [imageView addGestureRecognizer:tapImage];
-            for (UIView* subview in imageView.subviews) {
-                [subview removeFromSuperview];
-            }
-        }
-        
-        return cell;
-    }else if(indexPath.row == self.profile.count){
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyCell" forIndexPath:indexPath];
+//    if (indexPath.row == 0) {
+//        NSString *CellIdentifier = @"PictureCell";
+//        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+//        
+//        UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
+//
+//        if(self.profileImage == nil){
+//            UIActivityIndicatorView* loadingProfileImage = [[UIActivityIndicatorView alloc] init];
+//            loadingProfileImage.color = DEFAULT_TINT_COLOR;
+//            CGRect frame = loadingProfileImage.frame;
+//            frame.origin.y = 73.0f;
+//            
+//            frame.origin.x = [UIScreen mainScreen].bounds.size.width / 2;
+//            [loadingProfileImage startAnimating];
+//            loadingProfileImage.frame = frame;
+//            [imageView addSubview:loadingProfileImage];
+//            cell.userInteractionEnabled = NO; 
+//        } else {
+//            cell.userInteractionEnabled = YES;   
+//            imageView.image = self.profileImage;
+//            imageView.userInteractionEnabled = YES;
+//            [imageView addGestureRecognizer:tapImage];
+//            for (UIView* subview in imageView.subviews) {
+//                [subview removeFromSuperview];
+//            }
+//        }
+//        
+//        return cell;
+//    } else if(indexPath.row == self.profile.count){
+//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyCell" forIndexPath:indexPath];
+//        
+//        [cell setSelectedBackgroundView:[self createSelectedBackgroundView:cell.frame]];
+//        cell.textLabel.font = cellFont;
+//                
+//        NSDictionary *currentProfileRow = self.profile[@"1"];
+//        
+//        NSString *userId = [NSString stringWithFormat:@"%@ %@", currentProfileRow[@"firstname"],currentProfileRow[@"lastname"]];
+//        
+//        cell.accessoryType = UITableViewCellAccessoryNone;
+//        cell.textLabel.text = userId;
+//        cell.detailTextLabel.text = @"Copyright";
+//        cell.userInteractionEnabled = NO;
+//       
+//        return cell;
+//    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"MyCell" forIndexPath:indexPath];
         
         [cell setSelectedBackgroundView:[self createSelectedBackgroundView:cell.frame]];
         cell.textLabel.font = cellFont;
-                
-        NSDictionary *currentProfileRow = self.profile[@"1"];
         
-        NSString *userId = [NSString stringWithFormat:@"%@ %@", currentProfileRow[@"firstname"],currentProfileRow[@"lastname"]];
-        
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.textLabel.text = userId;
-        cell.detailTextLabel.text = @"Copyright";
-        cell.userInteractionEnabled = NO;
-       
-        return cell;
-    } else {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyCell" forIndexPath:indexPath];
-        
-        [cell setSelectedBackgroundView:[self createSelectedBackgroundView:cell.frame]];
-        cell.textLabel.font = cellFont;
-        
-        NSDictionary *currentProfileRow = self.profile[[NSString stringWithFormat:@"%i", indexPath.row]];
-        
+    NSDictionary *currentProfileRow = self.profile[@""];
+    
         //Aus der aktuellen Reihe den String "vorname" auslesen und dem Tabellenlabes gleichsetzen.
         cell.textLabel.text = currentProfileRow[@"name"];
         cell.detailTextLabel.text = currentProfileRow[@"value"];
         cell.userInteractionEnabled = YES;
         
          return cell;
-    }
+//    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

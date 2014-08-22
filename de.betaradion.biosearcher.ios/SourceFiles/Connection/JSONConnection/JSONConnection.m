@@ -42,6 +42,8 @@
             [path appendString:optionsPath];
             break;
         case DataTypeProfile:
+            [path appendString:profilePath];
+            [path appendString:[NSString stringWithFormat:@"%i/",parentID.intValue]];
             break;
             
         default:
@@ -50,7 +52,6 @@
     }
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:path]];
-    
     NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     [conn start];
 }
@@ -60,7 +61,7 @@
     self.loadedDataType = DataTypeSpecies;
     
     NSMutableString *path = [NSMutableString stringWithString:webPath];
-    [path appendString:search];
+    [path appendString:searchPath];
     [path appendString:[NSString stringWithFormat:@"?family=%@", id.stringValue]];
     
     for (NSString *key in characters) {
