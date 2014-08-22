@@ -4,3 +4,6 @@
 /.settings/
 /.project
 *.DS_Store
+/target/
+/libs/
+/WebContent/WEB-INF/lib/

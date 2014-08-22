@@ -14,7 +14,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.map.annotate.JsonView;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import de.betaradion.biosearcher.model.jackson.Views;
 
@@ -30,13 +30,13 @@ import de.betaradion.biosearcher.model.jackson.Views;
 public class Option implements Serializable {
 	@JsonView(Views.Transient.class)
 	private static final long serialVersionUID = 1L;
-	@JsonView(Views.OptionListView.class)
+	@JsonView(Views.CharacterView.class)
 	private int oid;
-	@JsonView(Views.OptionListView.class)
+	@JsonView(Views.CharacterView.class)
 	private String description;
-	@JsonView(Views.OptionListView.class)
+	@JsonView(Views.CharacterView.class)
 	private String img;
-	@JsonView(Views.OptionListView.class)
+	@JsonView(Views.CharacterView.class)
 	private String name;
 	@JsonView(Views.Transient.class)
 	private Character character;

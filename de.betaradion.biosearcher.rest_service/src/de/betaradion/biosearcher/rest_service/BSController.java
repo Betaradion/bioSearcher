@@ -14,20 +14,20 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.codehaus.jackson.map.annotate.JsonView;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import de.betaradion.biosearcher.model.Character;
 import de.betaradion.biosearcher.model.Family;
-import de.betaradion.biosearcher.model.Option;
 import de.betaradion.biosearcher.model.jackson.Views;
 
-@Path("/families")
+@Path("/api")
 public class BSController {
 
 	EntityManagerFactory factory = Persistence
 			.createEntityManagerFactory("bioSearcher");
 	EntityManager em = factory.createEntityManager();
 
+	@Path("/families")
 	@JsonView(Views.FamilyListView.class)
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -41,7 +41,7 @@ public class BSController {
 		return families.toArray(new Family[families.size()]);
 	}
 
-	@Path("/{fid}")
+	@Path("/family/{fid}")
 	@JsonView(Views.FamilyView.class)
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -56,21 +56,7 @@ public class BSController {
 		return family;
 	}
 
-	@Path("/{fid}/characters")
-	@JsonView(Views.CharacterListView.class)
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Character[] showCharactersofFamily(@PathParam("fid") int fid) {
-		em.getTransaction().begin();
-		TypedQuery<Character> charactersQuery = em.createNamedQuery(
-				"Character.findByFID", Character.class);
-		charactersQuery.setParameter("id", fid);
-		List<Character> characters = charactersQuery.getResultList();
-		em.close();
-		return characters.toArray(new Character[characters.size()]);
-	}
-
-	@Path("/{fid}/characters/{cid}")
+	@Path("/character/{cid}")
 	@JsonView(Views.CharacterView.class)
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -85,34 +71,18 @@ public class BSController {
 		return character;
 	}
 
-	@Path("/{fid}/characters/{cid}/options")
-	@JsonView(Views.OptionListView.class)
+	@Path("/full")
+	@JsonView(Views.FullView.class)
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Option[] showOptions(@PathParam("cid") int cid) {
+	public Family[] getFullClone() {
 		em.getTransaction().begin();
-		TypedQuery<Option> optionsQuery = em.createNamedQuery(
-				"Option.findByCID", Option.class);
-		optionsQuery.setParameter("id", cid);
-		List<Option> options = optionsQuery.getResultList();
+		TypedQuery<Family> familiesQuery = em.createNamedQuery(
+				"Family.findAll", Family.class);
+		List<Family> families = familiesQuery.getResultList();
 		em.close();
 
-		return options.toArray(new Option[options.size()]);
-	}
-
-	@Path("/{fid}/characters/{cid}/options/{oid}")
-	@JsonView(Views.OptionView.class)
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Option showOptionForId(@PathParam("oid") int oid) {
-		em.getTransaction().begin();
-		TypedQuery<Option> optionQuery = em.createNamedQuery(
-				"Option.findByOID", Option.class);
-		optionQuery.setParameter("id", oid);
-		Option option = optionQuery.getSingleResult();
-		em.close();
-
-		return option;
+		return families.toArray(new Family[families.size()]);
 	}
 
 	@Path("family")

@@ -17,7 +17,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.map.annotate.JsonView;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import de.betaradion.biosearcher.model.jackson.Views;
 
@@ -33,13 +33,13 @@ import de.betaradion.biosearcher.model.jackson.Views;
 public class Character implements Serializable {
 	@JsonView(Views.Transient.class)
 	private static final long serialVersionUID = 1L;
-	@JsonView(Views.CharacterListView.class)
+	@JsonView(Views.FamilyView.class)
 	private int cid;
-	@JsonView(Views.CharacterListView.class)
+	@JsonView(Views.FamilyView.class)
 	private String description;
-	@JsonView(Views.CharacterListView.class)
+	@JsonView(Views.FamilyView.class)
 	private String img;
-	@JsonView(Views.CharacterListView.class)
+	@JsonView(Views.FamilyView.class)
 	private String name;
 	@JsonView(Views.Transient.class)
 	private Family family;
