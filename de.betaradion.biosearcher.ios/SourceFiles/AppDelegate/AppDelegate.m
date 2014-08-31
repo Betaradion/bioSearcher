@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Flurry.h"
+#import "LoadingController.h"
 
 @implementation AppDelegate
 
@@ -20,6 +21,9 @@
     [Flurry setDebugLogEnabled:NO];
     [Flurry setCrashReportingEnabled:YES];
     [Flurry startSession:@"F33WSPC7C65VSV9SN8DT"];
+    
+    LoadingController *loadingController = [LoadingController sharedManager];
+    
     
     return YES;
 }

@@ -7,10 +7,10 @@
 //
 
 #import "AnimalFamilyViewController.h"
-#import "JSONConnection.h"
 #import "CharactersTableViewController.h"
 #import "ResultTableViewController.h"
 #import "Flurry.h"
+#import "LoadingController.h"
 
 @interface AnimalFamilyViewController ()
 
@@ -23,7 +23,11 @@
     [super viewDidLoad];
     self.selectedFamily = [[NSDictionary alloc] init];
     self.families = [[NSArray alloc] init];
-
+    
+    [[LoadingController sharedManager] addObserver:self
+                                        forKeyPath:@"families"
+                                           options:0
+                                           context:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -31,33 +35,13 @@
     [super viewWillAppear:animated];
     if(self.families.count == 0){
         [self showHud:animated];
-        
-        JSONConnection *conn = [[JSONConnection alloc] init];
-        [conn loadData:DataTypeFamilies forParentId:0];
-    }
+        }
 }
 
 - (void)refreshAction
 {
     [self showHud:YES];
-    JSONConnection *conn = [[JSONConnection alloc] init];
-    [conn loadData:DataTypeFamilies forParentId:0];
     self.families = [NSArray array];
-}
-
-
-- (void) didFinishLoadingFromNet:(NSNotification*)notification
-{
-    NSDictionary* info = notification.userInfo;
-
-    NSString *type = info[@"loadedField"];
-    if ([type isEqualToString:[NSString stringWithFormat:@"%d", DataTypeFamilies]])
-    {
-        self.families = info[@"data"];
-        [self.refreshControl endRefreshing];
-        [self hideHud:YES];
-        [self.tableView reloadData];
-    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -78,10 +62,10 @@
     [cell setSelectedBackgroundView:[self createSelectedBackgroundView:cell.frame]];
     cell.textLabel.font = cellFont;
     
-    NSDictionary *currentFamily = self.families[indexPath.row];
+    Family *currentFamily = self.families[indexPath.row];
 
     //Aus der aktuellen Reihe den String "vorname" auslesen und dem Tabellenlabes gleichsetzen.
-    cell.textLabel.text = currentFamily[@"name"];
+    cell.textLabel.text = currentFamily.name;
     
     return cell;
 }
@@ -113,6 +97,18 @@
         resultTVC.options = [NSMutableDictionary dictionary];
         
         [Flurry logEvent:@"Family Selected" withParameters:@{self.selectedFamily: @"Family Selected", @"Overview": @"called by"}];
+    }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"families"])
+    {
+        self.families = [LoadingController sharedManager].families;
+        [self.refreshControl endRefreshing];
+        [self hideHud:YES];
+        [self.tableView reloadData];
+
     }
 }
 

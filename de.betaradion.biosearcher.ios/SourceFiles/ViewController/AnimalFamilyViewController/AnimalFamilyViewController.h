@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BSTableViewController.h"
+#import "Family.h"
 
 @interface AnimalFamilyViewController : BSTableViewController
 @property (nonatomic, strong) NSDictionary* selectedFamily;

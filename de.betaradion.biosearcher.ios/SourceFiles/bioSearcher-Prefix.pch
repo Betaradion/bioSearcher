@@ -18,6 +18,8 @@
 #define CUSTOM_CELL_SELECTED_BACKGROUND_COLOR [UIColor colorWithRed:26.0/255.0 green:164.0/255.0 blue:7.0/255.0 alpha:0.8f]
 #define cellFont [UIFont fontWithName:@"Helvetica-Light" size:15.50f]
 
+#define WebServicePath @"http://localhost:8080/biosearcher/api/"
+
 typedef enum DataType{
     DataTypeFamilies,
     DataTypeFamily,
